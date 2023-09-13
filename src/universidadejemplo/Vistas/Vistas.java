@@ -27,17 +27,17 @@ public class Vistas extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu8 = new javax.swing.JMenu();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         formAlumno = new javax.swing.JMenu();
-        menuAlumno = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jmMateria = new javax.swing.JMenu();
-        formMateria = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jmAdmin = new javax.swing.JMenu();
-        inscripciones = new javax.swing.JMenu();
-        notas = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
-        consultasAlum = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
         jMenu8.setText("jMenu8");
@@ -46,11 +46,18 @@ public class Vistas extends javax.swing.JFrame {
         setForeground(new java.awt.Color(0, 51, 102));
         setType(java.awt.Window.Type.UTILITY);
 
-        formAlumno.setText("Alumno");
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 388, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 267, Short.MAX_VALUE)
+        );
 
-        menuAlumno.setText("Formulario de Alumno");
-        menuAlumno.setToolTipText("");
-        formAlumno.add(menuAlumno);
+        formAlumno.setText("Alumno");
 
         jMenuItem1.setText("Formulario de Alumno");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -64,25 +71,25 @@ public class Vistas extends javax.swing.JFrame {
 
         jmMateria.setText("Materia");
 
-        formMateria.setText("Formulario de Materia");
-        jmMateria.add(formMateria);
+        jMenuItem2.setText("Formulario de Materia");
+        jmMateria.add(jMenuItem2);
 
         jMenuBar2.add(jmMateria);
 
         jmAdmin.setText("Administración");
 
-        inscripciones.setText("Manejo de inscripciones");
-        jmAdmin.add(inscripciones);
+        jMenuItem3.setText("Manejo de inscripciones");
+        jmAdmin.add(jMenuItem3);
 
-        notas.setText("Manipulación de notas");
-        jmAdmin.add(notas);
+        jMenuItem4.setText("Manipulación de notas");
+        jmAdmin.add(jMenuItem4);
 
         jMenuBar2.add(jmAdmin);
 
         jmConsultas.setText("Consultas");
 
-        consultasAlum.setText("Alumnos por Materia");
-        jmConsultas.add(consultasAlum);
+        jMenuItem5.setText("Alumnos por Materia");
+        jmConsultas.add(jMenuItem5);
 
         jMenuBar2.add(jmConsultas);
 
@@ -95,11 +102,17 @@ public class Vistas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -145,18 +158,18 @@ public class Vistas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu consultasAlum;
     private javax.swing.JMenu formAlumno;
-    private javax.swing.JMenu formMateria;
-    private javax.swing.JMenu inscripciones;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmAdmin;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
-    private javax.swing.JMenu menuAlumno;
-    private javax.swing.JMenu notas;
     // End of variables declaration//GEN-END:variables
 }
