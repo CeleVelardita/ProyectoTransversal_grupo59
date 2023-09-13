@@ -26,61 +26,43 @@ public class Vistas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu8 = new javax.swing.JMenu();
-        jPanel1 = new javax.swing.JPanel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
-        menuAlumno = new javax.swing.JMenu();
         jmMateria = new javax.swing.JMenu();
-        menuMateria = new javax.swing.JMenu();
         jmAdmin = new javax.swing.JMenu();
-        menuAdmin = new javax.swing.JMenu();
         jmConsultas = new javax.swing.JMenu();
-        menuConsultas = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
-
-        jMenu8.setText("jMenu8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+        jDesktopPane1.setBackground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 408, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 287, Short.MAX_VALUE)
         );
 
         jmAlumno.setText("Alumno");
-
-        menuAlumno.setText("Formulario de Alumno");
-        menuAlumno.setToolTipText("");
-        jmAlumno.add(menuAlumno);
-        menuAlumno.getAccessibleContext().setAccessibleParent(null);
-
         jMenuBar2.add(jmAlumno);
 
         jmMateria.setText("Materia");
-
-        menuMateria.setText("jMenu10");
-        jmMateria.add(menuMateria);
-
         jMenuBar2.add(jmMateria);
 
         jmAdmin.setText("Administración");
-
-        menuAdmin.setText("jMenu11");
-        jmAdmin.add(menuAdmin);
-
         jMenuBar2.add(jmAdmin);
 
         jmConsultas.setText("Consultas");
 
-        menuConsultas.setText("jMenu12");
-        jmConsultas.add(menuConsultas);
+        jMenuItem1.setText("Alumno por Materia");
+        jmConsultas.add(jMenuItem1);
 
         jMenuBar2.add(jmConsultas);
 
@@ -93,17 +75,11 @@ public class Vistas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -145,17 +121,13 @@ public class Vistas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu8;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmAdmin;
     private javax.swing.JMenu jmAlumno;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
-    private javax.swing.JMenu menuAdmin;
-    private javax.swing.JMenu menuAlumno;
-    private javax.swing.JMenu menuConsultas;
-    private javax.swing.JMenu menuMateria;
     // End of variables declaration//GEN-END:variables
 }
