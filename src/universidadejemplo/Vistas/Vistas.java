@@ -27,60 +27,62 @@ public class Vistas extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu8 = new javax.swing.JMenu();
-        jPanel1 = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
-        jmAlumno = new javax.swing.JMenu();
+        formAlumno = new javax.swing.JMenu();
         menuAlumno = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmMateria = new javax.swing.JMenu();
-        menuMateria = new javax.swing.JMenu();
+        formMateria = new javax.swing.JMenu();
         jmAdmin = new javax.swing.JMenu();
-        menuAdmin = new javax.swing.JMenu();
+        inscripciones = new javax.swing.JMenu();
+        notas = new javax.swing.JMenu();
         jmConsultas = new javax.swing.JMenu();
-        menuConsultas = new javax.swing.JMenu();
+        consultasAlum = new javax.swing.JMenu();
         jmSalir = new javax.swing.JMenu();
 
         jMenu8.setText("jMenu8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setForeground(new java.awt.Color(0, 51, 102));
+        setType(java.awt.Window.Type.UTILITY);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
-        );
-
-        jmAlumno.setText("Alumno");
+        formAlumno.setText("Alumno");
 
         menuAlumno.setText("Formulario de Alumno");
         menuAlumno.setToolTipText("");
-        jmAlumno.add(menuAlumno);
-        menuAlumno.getAccessibleContext().setAccessibleParent(null);
+        formAlumno.add(menuAlumno);
 
-        jMenuBar2.add(jmAlumno);
+        jMenuItem1.setText("Formulario de Alumno");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        formAlumno.add(jMenuItem1);
+
+        jMenuBar2.add(formAlumno);
 
         jmMateria.setText("Materia");
 
-        menuMateria.setText("jMenu10");
-        jmMateria.add(menuMateria);
+        formMateria.setText("Formulario de Materia");
+        jmMateria.add(formMateria);
 
         jMenuBar2.add(jmMateria);
 
         jmAdmin.setText("Administración");
 
-        menuAdmin.setText("jMenu11");
-        jmAdmin.add(menuAdmin);
+        inscripciones.setText("Manejo de inscripciones");
+        jmAdmin.add(inscripciones);
+
+        notas.setText("Manipulación de notas");
+        jmAdmin.add(notas);
 
         jMenuBar2.add(jmAdmin);
 
         jmConsultas.setText("Consultas");
 
-        menuConsultas.setText("jMenu12");
-        jmConsultas.add(menuConsultas);
+        consultasAlum.setText("Alumnos por Materia");
+        jmConsultas.add(consultasAlum);
 
         jMenuBar2.add(jmConsultas);
 
@@ -93,21 +95,19 @@ public class Vistas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,17 +145,18 @@ public class Vistas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu consultasAlum;
+    private javax.swing.JMenu formAlumno;
+    private javax.swing.JMenu formMateria;
+    private javax.swing.JMenu inscripciones;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmAdmin;
-    private javax.swing.JMenu jmAlumno;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
-    private javax.swing.JMenu menuAdmin;
     private javax.swing.JMenu menuAlumno;
-    private javax.swing.JMenu menuConsultas;
-    private javax.swing.JMenu menuMateria;
+    private javax.swing.JMenu notas;
     // End of variables declaration//GEN-END:variables
 }
