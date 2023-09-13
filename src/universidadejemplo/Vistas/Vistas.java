@@ -1,3 +1,8 @@
+package universidadejemplo.Vistas;
+
+
+import universidadejemplo.Vistas.Consultas_AlumnosPorMateria;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +31,7 @@ public class Vistas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
         jmMateria = new javax.swing.JMenu();
@@ -37,16 +42,16 @@ public class Vistas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDesktopPane1.setBackground(new java.awt.Color(153, 153, 153));
+        escritorio.setBackground(new java.awt.Color(153, 153, 153));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 408, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 287, Short.MAX_VALUE)
         );
 
@@ -60,6 +65,11 @@ public class Vistas extends javax.swing.JFrame {
         jMenuBar2.add(jmAdmin);
 
         jmConsultas.setText("Consultas");
+        jmConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmConsultasActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Alumno por Materia");
         jmConsultas.add(jMenuItem1);
@@ -75,15 +85,32 @@ public class Vistas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
+        
+
+        // Limpio la ventana 
+        escritorio.removeAll();
+        escritorio.repaint();
+        //instancio una variable de la ventana Consultas Alumnos por Materia
+        Consultas_AlumnosPorMateria consulta = new Consultas_AlumnosPorMateria();
+        //por defecto la ventana está invisible, la hago visible:
+        consulta.setVisible(true);
+        //agrego la ventana consulta al escritorio principal
+        escritorio.add(consulta);
+        //traigo al frente la ventana consulta
+        escritorio.moveToFront(consulta);
+        
+    }//GEN-LAST:event_jmConsultasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,7 +148,7 @@ public class Vistas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmAdmin;
