@@ -41,22 +41,23 @@ public class Vistas extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmConsultas_AlumPorMateria = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         escritorio.setBackground(new java.awt.Color(204, 204, 204));
+        escritorio.setPreferredSize(new java.awt.Dimension(700, 600));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 408, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 287, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
         jmAlumno.setText("Alumno");
@@ -90,8 +91,13 @@ public class Vistas extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Alumno por Materia");
-        jmConsultas.add(jMenuItem1);
+        jmConsultas_AlumPorMateria.setText("Alumno por Materia");
+        jmConsultas_AlumPorMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmConsultas_AlumPorMateriaActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmConsultas_AlumPorMateria);
 
         jMenuBar2.add(jmConsultas);
 
@@ -104,19 +110,22 @@ public class Vistas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
-        
+       
+    }//GEN-LAST:event_jmConsultasActionPerformed
 
+    private void jmConsultas_AlumPorMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultas_AlumPorMateriaActionPerformed
+        
         // Limpio la ventana 
         escritorio.removeAll();
         escritorio.repaint();
@@ -128,8 +137,7 @@ public class Vistas extends javax.swing.JFrame {
         escritorio.add(consulta);
         //traigo al frente la ventana consulta
         escritorio.moveToFront(consulta);
-        
-    }//GEN-LAST:event_jmConsultasActionPerformed
+    }//GEN-LAST:event_jmConsultas_AlumPorMateriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,7 +177,6 @@ public class Vistas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -177,6 +184,7 @@ public class Vistas extends javax.swing.JFrame {
     private javax.swing.JMenu jmAdmin;
     private javax.swing.JMenu jmAlumno;
     private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenuItem jmConsultas_AlumPorMateria;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
     // End of variables declaration//GEN-END:variables
