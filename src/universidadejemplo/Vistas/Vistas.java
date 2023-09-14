@@ -34,15 +34,19 @@ public class Vistas extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jmMateria = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jmAdmin = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        escritorio.setBackground(new java.awt.Color(153, 153, 153));
+        escritorio.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -56,12 +60,27 @@ public class Vistas extends javax.swing.JFrame {
         );
 
         jmAlumno.setText("Alumno");
+
+        jMenuItem2.setText("Formulario de Alumno");
+        jmAlumno.add(jMenuItem2);
+
         jMenuBar2.add(jmAlumno);
 
         jmMateria.setText("Materia");
+
+        jMenuItem3.setText("Formulario de Materia");
+        jmMateria.add(jMenuItem3);
+
         jMenuBar2.add(jmMateria);
 
         jmAdmin.setText("Administración");
+
+        jMenuItem4.setText("Manejo de Inscripciones");
+        jmAdmin.add(jMenuItem4);
+
+        jMenuItem5.setText("Manipulación de Notas");
+        jmAdmin.add(jMenuItem5);
+
         jMenuBar2.add(jmAdmin);
 
         jmConsultas.setText("Consultas");
@@ -151,6 +170,10 @@ public class Vistas extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmAdmin;
     private javax.swing.JMenu jmAlumno;
     private javax.swing.JMenu jmConsultas;
