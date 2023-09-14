@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Conexion {
-    private static final String URL="jbdc:mysql://localhost/";
+    private static final String URL="jbdc:mariadb://localhost/"; 
     private static final String DB="universidadulp";
     private static final String USUARIO="root";
     private static String PASSWORD="";
