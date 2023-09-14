@@ -8,16 +8,60 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alumno"/>
           </Properties>
+<<<<<<< HEAD
+=======
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="menuAlumno">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Formulario de Alumno"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Formulario de Alumno"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+>>>>>>> parent of 0440461 (vistas)
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmMateria">
           <Properties>
             <Property name="text" type="java.lang.String" value="Materia"/>
           </Properties>
+<<<<<<< HEAD
+=======
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="formMateria">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Formulario de Materia"/>
+              </Properties>
+            </Menu>
+          </SubComponents>
+>>>>>>> parent of 0440461 (vistas)
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmAdmin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Administraci&#xf3;n"/>
           </Properties>
+<<<<<<< HEAD
+=======
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="inscripciones">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Manejo de inscripciones"/>
+              </Properties>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="notas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Manipulaci&#xf3;n de notas"/>
+              </Properties>
+            </Menu>
+          </SubComponents>
+>>>>>>> parent of 0440461 (vistas)
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmConsultas">
           <Properties>
@@ -27,11 +71,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmConsultasActionPerformed"/>
           </Events>
           <SubComponents>
+<<<<<<< HEAD
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+=======
+            <Menu class="javax.swing.JMenu" name="consultasAlum">
+>>>>>>> parent of 0440461 (vistas)
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alumno por Materia"/>
               </Properties>
-            </MenuItem>
+            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmSalir">
@@ -65,11 +113,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Component id="escritorio" alignment="0" max="32767" attributes="0"/>
+=======
+          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+>>>>>>> parent of 0440461 (vistas)
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
           <Component id="escritorio" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -96,4 +149,10 @@
       </Layout>
     </Container>
   </SubComponents>
+=======
+          <EmptySpace min="0" pref="277" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+>>>>>>> parent of 0440461 (vistas)
 </Form>

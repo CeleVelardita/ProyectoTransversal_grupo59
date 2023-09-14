@@ -31,6 +31,7 @@ public class Vistas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
@@ -38,10 +39,25 @@ public class Vistas extends javax.swing.JFrame {
         jmAdmin = new javax.swing.JMenu();
         jmConsultas = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+=======
+        jMenu8 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        formAlumno = new javax.swing.JMenu();
+        menuAlumno = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jmMateria = new javax.swing.JMenu();
+        formMateria = new javax.swing.JMenu();
+        jmAdmin = new javax.swing.JMenu();
+        inscripciones = new javax.swing.JMenu();
+        notas = new javax.swing.JMenu();
+        jmConsultas = new javax.swing.JMenu();
+        consultasAlum = new javax.swing.JMenu();
+>>>>>>> parent of 0440461 (vistas)
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+<<<<<<< HEAD
         escritorio.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -62,6 +78,39 @@ public class Vistas extends javax.swing.JFrame {
         jMenuBar2.add(jmMateria);
 
         jmAdmin.setText("Administración");
+=======
+        formAlumno.setText("Alumno");
+
+        menuAlumno.setText("Formulario de Alumno");
+        menuAlumno.setToolTipText("");
+        formAlumno.add(menuAlumno);
+
+        jMenuItem1.setText("Formulario de Alumno");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        formAlumno.add(jMenuItem1);
+
+        jMenuBar2.add(formAlumno);
+
+        jmMateria.setText("Materia");
+
+        formMateria.setText("Formulario de Materia");
+        jmMateria.add(formMateria);
+
+        jMenuBar2.add(jmMateria);
+
+        jmAdmin.setText("Administración");
+
+        inscripciones.setText("Manejo de inscripciones");
+        jmAdmin.add(inscripciones);
+
+        notas.setText("Manipulación de notas");
+        jmAdmin.add(notas);
+
+>>>>>>> parent of 0440461 (vistas)
         jMenuBar2.add(jmAdmin);
 
         jmConsultas.setText("Consultas");
@@ -71,8 +120,13 @@ public class Vistas extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jMenuItem1.setText("Alumno por Materia");
         jmConsultas.add(jMenuItem1);
+=======
+        consultasAlum.setText("Alumnos por Materia");
+        jmConsultas.add(consultasAlum);
+>>>>>>> parent of 0440461 (vistas)
 
         jMenuBar2.add(jmConsultas);
 
@@ -85,16 +139,24 @@ public class Vistas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+=======
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 277, Short.MAX_VALUE)
+>>>>>>> parent of 0440461 (vistas)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/*
     private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
         
 
@@ -111,7 +173,7 @@ public class Vistas extends javax.swing.JFrame {
         escritorio.moveToFront(consulta);
         
     }//GEN-LAST:event_jmConsultasActionPerformed
-
+*/
     /**
      * @param args the command line arguments
      */
@@ -148,7 +210,15 @@ public class Vistas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JDesktopPane escritorio;
+=======
+    private javax.swing.JMenu consultasAlum;
+    private javax.swing.JMenu formAlumno;
+    private javax.swing.JMenu formMateria;
+    private javax.swing.JMenu inscripciones;
+    private javax.swing.JMenu jMenu8;
+>>>>>>> parent of 0440461 (vistas)
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmAdmin;
@@ -156,5 +226,7 @@ public class Vistas extends javax.swing.JFrame {
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
+    private javax.swing.JMenu menuAlumno;
+    private javax.swing.JMenu notas;
     // End of variables declaration//GEN-END:variables
 }
