@@ -5,6 +5,9 @@
  */
 package universidadejemplo.Vistas;
 
+import java.awt.Color;
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author Frank
@@ -16,6 +19,10 @@ public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
      */
     public Consultas_AlumnosPorMateria() {
         initComponents();
+       /* JInternalFrame frame = new JInternalFrame("Mi JFrame");
+        Color miColor = new Color(151, 68, 65);
+        getContentPane().setBackground(Color.getHSBColor(miColor));
+        */
     }
 
     /**
@@ -33,11 +40,15 @@ public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtListaDeAlumnos = new javax.swing.JTable();
 
+        setForeground(new java.awt.Color(53, 167, 112));
+
+        jlTitulo_listado.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jlTitulo_listado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitulo_listado.setText("Listado de Alumnos por Materia");
 
         jlSeleccioneMateria.setText("Seleccione una materia: ");
 
-        jcbMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbMateria.setToolTipText("");
         jcbMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbMateriaActionPerformed(evt);
@@ -73,7 +84,7 @@ public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jlTitulo_listado, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jlTitulo_listado, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

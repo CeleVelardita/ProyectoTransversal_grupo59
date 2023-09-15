@@ -54,6 +54,8 @@ public class Administracion_Manejo_de_Inscripciones extends javax.swing.JInterna
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setClosable(true);
+
         jlTitulo_Formulario.setText("Formulario de Inscripción");
 
         jlSeleccioneAlumno.setText("Seleccione unl Alumno: ");

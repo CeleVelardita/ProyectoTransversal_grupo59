@@ -34,9 +34,9 @@ public class Vistas extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmFormAlum = new javax.swing.JMenuItem();
         jmMateria = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmFormMat = new javax.swing.JMenuItem();
         jmAdmin = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -62,15 +62,30 @@ public class Vistas extends javax.swing.JFrame {
 
         jmAlumno.setText("Alumno");
 
-        jMenuItem2.setText("Formulario de Alumno");
-        jmAlumno.add(jMenuItem2);
+        jmFormAlum.setText("Formulario de Alumno");
+        jmFormAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormAlumActionPerformed(evt);
+            }
+        });
+        jmFormAlum.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jmFormAlumPropertyChange(evt);
+            }
+        });
+        jmAlumno.add(jmFormAlum);
 
         jMenuBar2.add(jmAlumno);
 
         jmMateria.setText("Materia");
 
-        jMenuItem3.setText("Formulario de Materia");
-        jmMateria.add(jMenuItem3);
+        jmFormMat.setText("Formulario de Materia");
+        jmFormMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFormMatActionPerformed(evt);
+            }
+        });
+        jmMateria.add(jmFormMat);
 
         jMenuBar2.add(jmMateria);
 
@@ -129,7 +144,7 @@ public class Vistas extends javax.swing.JFrame {
         // Limpio la ventana 
         escritorio.removeAll();
         escritorio.repaint();
-        //instancio una variable de la ventana Consultas Alumnos por Materia
+        //instancio una variable de la ventana Consultas Materia por Materia
         Consultas_AlumnosPorMateria consulta = new Consultas_AlumnosPorMateria();
         //por defecto la ventana está invisible, la hago visible:
         consulta.setVisible(true);
@@ -139,6 +154,48 @@ public class Vistas extends javax.swing.JFrame {
         escritorio.moveToFront(consulta);
     }//GEN-LAST:event_jmConsultas_AlumPorMateriaActionPerformed
 
+    private void jmFormAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormAlumActionPerformed
+        
+        // Limpio pantalla
+        escritorio.removeAll();
+        // Luego le indico que se redibuje
+        escritorio.repaint();
+        // Instancio un objeto de nuestra vista, en este caso sería la ventana "Materia", 
+        // donde encuentro el formulario para completar los datos
+        Alumno alum = new Alumno();
+        // Cuando creo una instancia de una ventana, por defecto está invisible, así que debo
+        // hacerlo visible
+        alum.setVisible(true); //Me pide un booleano, así que le pongo "true" para que se vea
+        // Luego agrego esta ventana al escritorio
+        escritorio.add(alum);
+        // Por último le digo al escritorio que traiga al frente esta ventana
+        escritorio.moveToFront(alum);
+    }//GEN-LAST:event_jmFormAlumActionPerformed
+
+    private void jmFormAlumPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jmFormAlumPropertyChange
+        // ESTO NO VA!!!
+    }//GEN-LAST:event_jmFormAlumPropertyChange
+
+    private void jmFormMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFormMatActionPerformed
+        // Limpio pantalla
+        escritorio.removeAll();
+        // Luego le indico que se redibuje
+        escritorio.repaint();
+        // Instancio un objeto de nuestra vista, en este caso sería la ventana "Materia", 
+        // donde encuentro el formulario para completar los datos
+        Materia mat = new Materia();
+        // Cuando creo una instancia de una ventana, por defecto está invisible, así que debo
+        // hacerlo visible
+        mat.setVisible(true); //Me pide un booleano, así que le pongo "true" para que se vea
+        // Luego agrego esta ventana al escritorio
+        escritorio.add(mat);
+        // Por último le digo al escritorio que traiga al frente esta ventana
+        escritorio.moveToFront(mat);
+    }//GEN-LAST:event_jmFormMatActionPerformed
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -177,14 +234,14 @@ public class Vistas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jmAdmin;
     private javax.swing.JMenu jmAlumno;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenuItem jmConsultas_AlumPorMateria;
+    private javax.swing.JMenuItem jmFormAlum;
+    private javax.swing.JMenuItem jmFormMat;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
     // End of variables declaration//GEN-END:variables
