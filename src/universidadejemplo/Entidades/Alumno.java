@@ -1,6 +1,6 @@
 
 package universidadejemplo.Entidades;
-// y por acá también pasé... confirmen en otra línea si se ve
+
 import java.time.LocalDate;
 
 public class Alumno {
