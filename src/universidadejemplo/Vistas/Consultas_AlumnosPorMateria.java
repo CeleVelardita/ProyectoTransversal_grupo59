@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package universidadejemplo.Vistas;
 
 import java.awt.Color;
 import javax.swing.JInternalFrame;
 
-/**
- *
- * @author Frank
- */
 public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Consultas_AlumnosPorMateria
-     */
     public Consultas_AlumnosPorMateria() {
         initComponents();
-       /* JInternalFrame frame = new JInternalFrame("Mi JFrame");
-        Color miColor = new Color(151, 68, 65);
-        getContentPane().setBackground(Color.getHSBColor(miColor));
-        */
+        
+        //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel (LO LOGRÉ!!!)
+        JInternalFrame frame = new JInternalFrame();
+        getContentPane().setBackground(new Color(0, 128, 128));
+        
     }
 
     /**
