@@ -42,12 +42,35 @@ public class InscripcionData {
                 insc.setIdInscripcion(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Inscripción REgistrada");
             }
-        
-        
+            ps.close();        
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripción");
-        }
-    
+        }    
     }
+        
+    //List<Inscripcion> obtenerInscripciones()
+    //List<Inscripcion> obtenerInscripcionesPorAlumno(int id)
+    //List<Materia> obtenerMateriasCursadas(int id)
+    //List<Materia> obtenerMateriasNOCursadas(int id)
+     
+    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMAteria){
+        
+    }
+    
+    public void actualizarNota (int idAlumno, int idMateria, double nota){
+     
+        String sql="UPDATE inscripcion SET nota = ? where idAlumno = ? and idMateria = ?";
+        try{
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setDouble( 1, nota);
+            ps.setInt( 1, idAlumno);
+            ps.setInt( 3, idAlumno);
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+        }
+    }
+    
+    //List<Alumno> obtenerAlumnosXMateria(int idMateria)
     
 }

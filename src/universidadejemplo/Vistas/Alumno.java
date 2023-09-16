@@ -46,7 +46,6 @@ public class Alumno extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jrbEstadoAlum = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
-        jdFechaNac = new com.toedter.calendar.JDateChooser();
         jbNuevoAlum = new javax.swing.JButton();
         jbEliminarAlum = new javax.swing.JButton();
         jbGuardarAlum = new javax.swing.JButton();
@@ -133,9 +132,7 @@ public class Alumno extends javax.swing.JInternalFrame {
                                 .addComponent(jtNombre)
                                 .addGap(103, 103, 103))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrbEstadoAlum)
-                                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jrbEstadoAlum)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(88, 88, 88))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -161,12 +158,13 @@ public class Alumno extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarAlum))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbBuscarAlum)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
@@ -177,17 +175,15 @@ public class Alumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jrbEstadoAlum)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel6)
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevoAlum)
                     .addComponent(jbGuardarAlum)
                     .addComponent(jbEliminarAlum)
                     .addComponent(jbSalirAlum))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,7 +218,6 @@ public class Alumno extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardarAlum;
     private javax.swing.JButton jbNuevoAlum;
     private javax.swing.JButton jbSalirAlum;
-    private com.toedter.calendar.JDateChooser jdFechaNac;
     private javax.swing.JRadioButton jrbEstadoAlum;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDni;
