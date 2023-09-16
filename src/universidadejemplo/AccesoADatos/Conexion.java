@@ -14,23 +14,26 @@ public class Conexion {
     private static final String USUARIO="root";
     private static String PASSWORD="";
     
-    private static Connection connection;
+    private static Connection connection;    
     
-    
-    //Método constructor
-    
+    // Método constructor
+    // HAGO UN CONSTRUCTOR PRIVADO PARA CONTROLAR LA CANTIDAD DE INSTANCIAS DE LA CLASE "CONEXION"
+    // Al ser privado, no voy a poder instanciar objetos desde afuera de esta clase
     private Conexion(){}
-    
+    // Creo métodos estáticos para poder implemetar métodos de tipo connection, pero primero se debe crear la conexión a la BD 
     public static Connection getConexion(){
         
         if(connection==null){
             try{
-                Class.forName("org.mariadb.jdbc.Driver");
+                Class.forName("org.mariadb.jdbc.Driver"); // Cargo los Driver
                 //Setup the connection with the DB
+                // Creo el objeto connection
                 connection = DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC"
                                                         +"&user=" + USUARIO + "&password=" + PASSWORD    
                                                         );
+                // si se quiere se podría agregarun JOption con un mensaje indicando que se ha conectado a la BD
             } catch(SQLException ex){
+                // RECORDAR!! El primer parámetro es "null" porque no se lanza desde ninguna ventana
                 JOptionPane.showMessageDialog(null, "Error al conectarse a la BD"+ex.getMessage());                
             } catch(ClassNotFoundException ex){
                 JOptionPane.showMessageDialog(null, "Error al cargar los Drivers "+ex.getMessage());                
