@@ -45,7 +45,15 @@ public class InscripcionData {
             ps.close();        
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripción");
-        }    
+        } 
+        
+      /*
+      Para probar este método   guardarInscripcion(Inscripcion insc)
+      tenemos que colocar en el main del proyecto la sentencia:
+      guardarInscripcion(insc);
+      donde insc será de tipo de la clase Inscripcion por lo que contendrá
+      los atributos y forma de tal clase (de la carpeta entidades, modelo de la BD)
+      */
     }
         
     //List<Inscripcion> obtenerInscripciones()
@@ -54,6 +62,32 @@ public class InscripcionData {
     //List<Materia> obtenerMateriasNOCursadas(int id)
      
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMAteria){
+        //borrado físico
+        String sql= "DELETE FROM inscripcion WHERE idAlumno =? and idMAteria=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idAlumno);
+            
+            int filas=ps.executeUpdate(); //el executeUpdate devuelve un entero
+            if(filas>0){
+                JOptionPane.showMessageDialog(null, "Inscripción Borrada");
+            }
+            
+            //cerramos el borrarInscripcionMateriaAlumno
+            ps.close();
+            /*
+            Para probar este mñetodo borrarInscripcionMateriaAlumno
+            en el main del proyecto escribo una sentencia:
+            id.borrarInscripcionMateriaAlumno(idAlumno, idMAteria)
+            donde idAlumno es el alumno que deseo dar de baja 
+            e id materia es el num. de materia 
+            en el que estña inscripto ese alumno
+            */
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ""+ex.getMessage());
+        }
         
     }
     
@@ -69,6 +103,15 @@ public class InscripcionData {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
         }
+    /*
+    Para probar este método actualizarNota(int idAlumno, int idMateria, double nota)
+    debemos escribir en el main del proyecto la sig. sentencia(método):
+    id.actualizarNota(idAlumno, idMateria, nota)
+    donde recibirá por argumento:
+        el id del Alumno
+        el id de la materia de ese alumno
+        la nota 
+    */
     }
     
     //List<Alumno> obtenerAlumnosXMateria(int idMateria)
