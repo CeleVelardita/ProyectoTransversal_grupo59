@@ -9,67 +9,33 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
 import javax.swing.*;
-/**
- *
- * @author Frank
- */
+import universidadejemplo.AccesoADatos.InscripcionData;
+
+import universidadejemplo.Entidades.Inscripcion;
+import universidadejemplo.Entidades.Alumno;
+import universidadejemplo.Entidades.Materia;
+
 public class UniversidadEjemplo {
 
     public static void main(String[] args) {
-       try{
-           //cargar driver de conexión
-           Class.forName("org.mariadb.jdbc.Driver");
-           
-           //conexión a la base de datos
-           Connection conn=DriverManager.getConnection("jdbc:mariadb://localhost/universidadulp","root", "");
-           
-           /*Ingresamos una materia a la tabla materia
-           
-           String sql= "insert into materia (nombre, año, estado) values ('Laboratorio 2', 2, true)";
-           
-           PreparedStatement ps=conn.prepareStatement(sql);
-           int filas=ps.executeUpdate();
-           if(filas>0){
-               JOptionPane.showMessageDialog(null, "Materia agregada Exitosamente");
-           }*/
-           
-           
-           /*
-           //agregamos un alumno
-           
-           String sql="insert into alumno (dni, apellido, nombre, fechaNacimiento, estado)" 
-                      +"values(52745628,'Lopez','Juan', ' " + LocalDate.of(2000,Month.AUGUST,29)+"',true);";
-          
-           PreparedStatement ps=conn.prepareStatement(sql);
-           int filas=ps.executeUpdate();
-           if(filas>0){
-               JOptionPane.showMessageDialog(null, "Alumno ingresado Exitosamente");
-           }*/
-           
-           
-           //Obtener todos los alumnos activos y listarlos por consola
-           
-           String sql="select * from alumno where estado = true";
-           PreparedStatement ps=conn.prepareStatement(sql);
-           ResultSet resultado=ps.executeQuery();
-           
-           while(resultado.next()){
-               System.out.println("Id "+resultado.getInt("idAlumno"));
-               System.out.println("DNI "+resultado.getInt("dni"));
-               System.out.println("Apellido "+resultado.getString("apellido"));
-               System.out.println("Nombre "+resultado.getString("nombre"));
-               System.out.println("Fecha de Nacimiento "+resultado.getDate("fechaNacimiento"));
-               System.out.println("-----------------------------------------------------------"); 
-           }
-           
-       } catch (ClassNotFoundException ex){
-           JOptionPane.showMessageDialog(null, "Debe agregar los driver al proyecto!!!");           
-       } /*catch (SQLException ex){
-           JOptionPane.showMessageDialog(null, "Error de Conexión");
-       } */catch(SQLException e){
-           JOptionPane.showMessageDialog(null, "Error "+e.getMessage());
-       }
-    }    
+    
+        InscripcionData id=new InscripcionData();
+        
+    //Pruebas en Clases de carpeta AccesoADatos
+    /*PRUEBAS InscripcionDAata*/
+        
+        //id.guardarInscripcion(insc);
+        //id.actualizarNota(7, 2, 7);
+        //id.borrarInscripcionMateriaAlumno(7, 2);
+        //List<Inscripcion> obtenerInscripciones() es lo siguiente:
+//            for(Inscripcion inscripcion:id.obtenerInscripciones()){
+//                System.out.println("id "+inscripcion.getIdInscripcion());
+//                System.out.println("Apellido "+inscripcion.getAlumno().getApellido());
+//                System.out.println("Mzteria "+inscripcion.getMateria().getNombre());
+//            }
+     
+        
+    }
 }
 
 /*Nota: Cuando las sentencia que envío a la base de datos son: Insert. Update, Delete invoco el
