@@ -5,7 +5,8 @@ import java.time.LocalDate;
 
 public class Alumno {
     int idAlumno; 
-    String apeliido;
+    int dni;
+    String apellido;
     String nombre;
     LocalDate fechaNac;
     boolean activo;
@@ -14,16 +15,18 @@ public class Alumno {
     public Alumno() {      
     }
     //constructor con todos los atributos
-    public Alumno(int idAlumno, String apeliido, String nombre, LocalDate fechaNac, boolean activo) {
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
         this.idAlumno = idAlumno;
-        this.apeliido = apeliido;
+        this.dni = dni;
+        this.apellido = apellido;
         this.nombre = nombre;
         this.fechaNac = fechaNac;
         this.activo = activo;
     }
     //constructor sin el idAlumnos
-    public Alumno(String apeliido, String nombre, LocalDate fechaNac, boolean activo) {
-        this.apeliido = apeliido;
+    public Alumno(int dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
+        this.dni = dni;
+        this.apellido = apellido;
         this.nombre = nombre;
         this.fechaNac = fechaNac;
         this.activo = activo;
@@ -39,12 +42,20 @@ public class Alumno {
         this.idAlumno = idAlumno;
     }
 
-    public String getApeliido() {
-        return apeliido;
+    public int getDni(){
+        return dni;
+    }
+    
+    public void setDni(int dni){
+        this.dni = dni;
+    }
+    
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApeliido(String apeliido) {
-        this.apeliido = apeliido;
+    public void setApeliido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getNombre() {
@@ -73,7 +84,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno{" + "idAlumno=" + idAlumno + ", apeliido=" + apeliido + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", activo=" + activo + '}';
+        return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apeliido=" + apellido + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", activo=" + activo + '}';
     }
        
 }

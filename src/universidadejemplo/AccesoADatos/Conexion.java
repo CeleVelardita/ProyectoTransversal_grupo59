@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Conexion {
-    private static final String URL="jbdc:mariadb://localhost/"; 
+    private static final String URL="jbdc:mariadb://localhost:3306/"; 
     private static final String DB="universidadulp";
     private static final String USUARIO="root";
     private static String PASSWORD="";
@@ -26,15 +26,19 @@ public class Conexion {
         if(connection==null){
             try{
                 Class.forName("org.mariadb.jdbc.Driver"); // Cargo los Driver
-                //Setup the connection with the DB
+                // Setup the connection with the DB
                 // Creo el objeto connection
-                connection = DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC"
+                
+                /*connection = DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC"
                                                         +"&user=" + USUARIO + "&password=" + PASSWORD    
-                                                        );
-                // si se quiere se podría agregarun JOption con un mensaje indicando que se ha conectado a la BD
+                                                        ); ESTO QUE ESTÁ EN LA GUÍA NO ME PERMITE LA CONEXIÓN A LA BD - CELE*/
+                
+                connection = DriverManager.getConnection("jdbc:mariadb://localhost/universidadulp","root", "");
+                // si se quiere se podría agregar un JOption con un mensaje indicando que se ha conectado a la BD
+                JOptionPane.showMessageDialog(null, "Conectado");
             } catch(SQLException ex){
                 // RECORDAR!! El primer parámetro es "null" porque no se lanza desde ninguna ventana
-                JOptionPane.showMessageDialog(null, "Error al conectarse a la BD"+ex.getMessage());                
+                JOptionPane.showMessageDialog(null, "Error al conectarse a la BD "+ex.getMessage());                
             } catch(ClassNotFoundException ex){
                 JOptionPane.showMessageDialog(null, "Error al cargar los Drivers "+ex.getMessage());                
             }  
