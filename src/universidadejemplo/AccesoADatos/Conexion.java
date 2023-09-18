@@ -26,7 +26,7 @@ public class Conexion {
         if(connection==null){
             try{
                 Class.forName("org.mariadb.jdbc.Driver"); // Cargo los Driver
-                // Setup the connection with the DB
+               
                 // Creo el objeto connection
                 
                 /*connection = DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC"

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package universidadejemplo.Entidades;
 
 public class Inscripcion {
@@ -65,7 +61,7 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        String insc= idInscripcion+" "+alumno.getApeliido()+", "+alumno.getNombre()+" "+materia.getNombre();
+        String insc= idInscripcion+" "+alumno.getApellido()+", "+alumno.getNombre()+" "+materia.getNombre();
         return insc;
     }
 }
