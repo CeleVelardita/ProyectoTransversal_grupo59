@@ -39,16 +39,14 @@ public class UniversidadEjemplo {
         Connection con = Conexion.getConexion();
 
         // Cargo un alumno           
-        Alumno pepito = new Alumno(4, 10987654, "Mansilla", "Julieta", LocalDate.of(1999, 8, 19), true); // Va el constructor sin el ID porque aún no lo tiene, es un nuevo alumno
+        Alumno pepito = new Alumno(7, 12345678, "Mansilla", "Julieta", LocalDate.of(1999, 8, 19), true); // Va el constructor sin el ID porque aún no lo tiene, es un nuevo alumno
         AlumnoData alum = new AlumnoData(); // Este objeto me permite agregar un alumno a la tabla
         //alum.guardarAlumno(pepito); // Luego de crear el AlumnoData, le digo que lo guarde
         // Comento la línea anterior porque el alumno ya está cargado en la BD y le agrego el ID al constructor para indicar que ese alumno ya existe
 
         // Modifico un alumno
-        //alum.modificarAlumno(pepito);
-        //pepito.setActivo(true); Probando si se puede cambiar el estado a activo, no me funciona :(
-        //alum.modificarAlumno(pepito);
-        
+        alum.modificarAlumno(pepito);
+       
         // Elimino un alumno
         //alum.eliminarAlumno(2);
         

@@ -72,17 +72,16 @@ public class AlumnoData {
     //El método modificarAlumno hace un UPDATE en la tabla, lo modifica
     
     public void modificarAlumno(Alumno alumno) {
-        String sql = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento = ?"
-                + "WHERE idAlumno = ?";
+        String sql = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento = ?, estado = ? WHERE idAlumno = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNac()));
-            //ps.setBoolean(5, alumno.isActivo());
+            ps.setBoolean(5, alumno.isActivo());
             // Por último se setea el ID
-            ps.setInt(5, alumno.getIdAlumno());
+            ps.setInt(6, alumno.getIdAlumno());
 
             //Luego ejecuto, RECORDAR QUE EL MÉTODO executeUpdate DEVUELVE UN ENTERO CON LA CANTIDAD DE FILAS ACEPTADAS
             int modificacion = ps.executeUpdate();
@@ -93,6 +92,7 @@ public class AlumnoData {
             } else {
                 JOptionPane.showMessageDialog(null, "El alumno no existe");
             }
+            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
@@ -152,7 +152,7 @@ public class AlumnoData {
     
     public Alumno buscarAlumnoPorDni(int dni){
         
-        String sql = "SELECT isAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
         // Seteo alumno en null, luego le cargo los datos del alumno buscado
         Alumno alumno = null;
         try {

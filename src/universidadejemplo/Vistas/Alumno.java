@@ -173,7 +173,11 @@ public class Alumno extends javax.swing.JInternalFrame {
     private void jbBuscarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarAlumActionPerformed
         // CLICK EN "BUSCAR" - SE VINCULA CON BUSCAR ALUMNO POR DNI
         AlumnoData alumnoData = new AlumnoData();
-        alumnoData.buscarAlumnoPorDni(Alumno.); // Me pide un int dni
+        // Debo parsear, convertir a un int el número que se ingresa en el JTextField
+        int dni = Integer.parseInt(jtDni.getText());
+        alumnoData.buscarAlumnoPorDni(dni); // Me pide un int dni
+        // Ahora se debería mostrar en los otros campos los datos correspondientes al alumno seleccionado
+        
         
         
     }//GEN-LAST:event_jbBuscarAlumActionPerformed
