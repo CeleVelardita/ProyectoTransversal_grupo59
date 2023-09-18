@@ -7,23 +7,16 @@ package universidadejemplo.Vistas;
 
 import java.awt.Color;
 import javax.swing.JDesktopPane;
+import universidadejemplo.AccesoADatos.AlumnoData;
 
-/**
- *
- * @author LENOVO
- */
 public class Alumno extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Alumno
-     */
     public Alumno() {
         initComponents();
         
         //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel (LO LOGRÉ!!!)
         getContentPane().setBackground(new Color(0, 128, 128));
-        
-        
+         
     }
 
     /**
@@ -63,44 +56,27 @@ public class Alumno extends javax.swing.JInternalFrame {
         jLabel2.setText("Documento:");
 
         jbBuscarAlum.setText("Buscar");
+        jbBuscarAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarAlumActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Apellido:");
 
         jLabel4.setText("Nombre:");
 
-        jtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtNombreActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Estado:");
-
-        jrbEstadoAlum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbEstadoAlumActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("Fecha de Nacimiento:");
 
         jbNuevoAlum.setText("Nuevo");
-        jbNuevoAlum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbNuevoAlumActionPerformed(evt);
-            }
-        });
 
         jbEliminarAlum.setText("Eliminar");
 
         jbGuardarAlum.setText("Guardar");
 
         jbSalirAlum.setText("Salir");
-        jbSalirAlum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirAlumActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,21 +165,13 @@ public class Alumno extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbEstadoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoAlumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbEstadoAlumActionPerformed
-
-    private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtNombreActionPerformed
-
-    private void jbNuevoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoAlumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbNuevoAlumActionPerformed
-
-    private void jbSalirAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirAlumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbSalirAlumActionPerformed
+    private void jbBuscarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarAlumActionPerformed
+        // CLICK EN "BUSCAR" - SE VINCULA CON BUSCAR ALUMNO POR DNI
+        AlumnoData alumnoData = new AlumnoData();
+        alumnoData.buscarAlumnoPorDni(Alumno.); // Me pide un int dni
+        
+        
+    }//GEN-LAST:event_jbBuscarAlumActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
