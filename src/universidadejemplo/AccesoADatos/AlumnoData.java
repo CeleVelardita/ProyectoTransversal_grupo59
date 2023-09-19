@@ -152,7 +152,7 @@ public class AlumnoData {
     
     public Alumno buscarAlumnoPorDni(int dni){
         
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ?"; // Le saco la condición para que muestre alumnos activos e inactivos
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM alumno WHERE dni = ?"; // Le saco la condición para que muestre alumnos activos e inactivos
         // Seteo alumno en null, luego le cargo los datos del alumno buscado
         Alumno alumno = null;
         try {
@@ -165,12 +165,14 @@ public class AlumnoData {
                 alumno.setApeliido(buscarDni.getString("apellido"));
                 alumno.setNombre(buscarDni.getString("nombre"));
                 alumno.setFechaNac(buscarDni.getDate("fechaNacimiento").toLocalDate());
-                alumno.setActivo(true);               
-            } else{
+                alumno.setActivo(buscarDni.getBoolean("estado"));           
+            
+            } else{           
                 JOptionPane.showMessageDialog(null, "No existe un alumno con el DNI ingresado");
             }
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla alumnos");
+            System.out.println(ex.getMessage());
         }
          return alumno;
     }

@@ -56,8 +56,21 @@ public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
             new String [] {
                 "ID", "DNI", "Apellido", "Nombre"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtListaDeAlumnos);
+        if (jtListaDeAlumnos.getColumnModel().getColumnCount() > 0) {
+            jtListaDeAlumnos.getColumnModel().getColumn(0).setResizable(false);
+            jtListaDeAlumnos.getColumnModel().getColumn(1).setResizable(false);
+            jtListaDeAlumnos.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jbSalirConsulta.setText("Salir");
 
