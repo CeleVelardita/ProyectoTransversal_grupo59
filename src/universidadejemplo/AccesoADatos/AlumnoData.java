@@ -152,7 +152,7 @@ public class AlumnoData {
     
     public Alumno buscarAlumnoPorDni(int dni){
         
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ?"; // Le saco la condición para que muestre alumnos activos e inactivos
         // Seteo alumno en null, luego le cargo los datos del alumno buscado
         Alumno alumno = null;
         try {

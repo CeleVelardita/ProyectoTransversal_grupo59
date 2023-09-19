@@ -132,7 +132,7 @@ public class Vistas extends javax.swing.JFrame {
         // Limpio la ventana 
         escritorio.removeAll();
         escritorio.repaint();
-        //instancio una variable de la ventana Consultas Materia por Materia
+        //instancio una variable de la ventana Consultas MateriaView por MateriaView
         Consultas_AlumnosPorMateria consulta = new Consultas_AlumnosPorMateria();
         //por defecto la ventana está invisible, la hago visible:
         consulta.setVisible(true);
@@ -149,9 +149,9 @@ public class Vistas extends javax.swing.JFrame {
         escritorio.removeAll();
         // Luego le indico que se redibuje
         escritorio.repaint();
-        // Instancio un objeto de nuestra vista, en este caso sería la ventana "Materia", 
+        // Instancio un objeto de nuestra vista, en este caso sería la ventana "MateriaView", 
         // donde encuentro el formulario para completar los datos
-        Alumno alum = new Alumno();
+        AlumnoView alum = new AlumnoView();
         // Cuando creo una instancia de una ventana, por defecto está invisible, así que debo
         // hacerlo visible
         alum.setVisible(true); //Me pide un booleano, así que le pongo "true" para que se vea
@@ -168,9 +168,9 @@ public class Vistas extends javax.swing.JFrame {
         escritorio.removeAll();
         // Luego le indico que se redibuje
         escritorio.repaint();
-        // Instancio un objeto de nuestra vista, en este caso sería la ventana "Materia", 
+        // Instancio un objeto de nuestra vista, en este caso sería la ventana "MateriaView", 
         // donde encuentro el formulario para completar los datos
-        Materia mat = new Materia();
+        MateriaView mat = new MateriaView();
         // Cuando creo una instancia de una ventana, por defecto está invisible, así que debo
         // hacerlo visible
         mat.setVisible(true); //Me pide un booleano, así que le pongo "true" para que se vea
