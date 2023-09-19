@@ -205,6 +205,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcbEstado">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbEstadoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

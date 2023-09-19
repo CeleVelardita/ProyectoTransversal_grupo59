@@ -89,6 +89,12 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
         jbSalirAlum.setText("Salir");
 
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,13 +207,17 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         alumno.setNombre(jtNombre.getText());
         alumno.setDni(dni);
         alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        
+        //alumno.setActivo(jcbEstado.);
         
     }//GEN-LAST:event_jbNuevoAlumActionPerformed
 
     private void jbGuardarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarAlumActionPerformed
         // CLICK EN "GUARDAR" - SE VINCULA CON "
     }//GEN-LAST:event_jbGuardarAlumActionPerformed
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        
+    }//GEN-LAST:event_jcbEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
