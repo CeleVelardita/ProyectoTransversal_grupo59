@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package universidadejemplo.Vistas;
 
 import java.awt.Color;
 import java.sql.Date;
+import java.time.ZoneId;
 import javax.swing.JDesktopPane;
 import javax.swing.JTextField;
 import universidadejemplo.AccesoADatos.AlumnoData;
@@ -84,8 +81,19 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         jbEliminarAlum.setText("Eliminar");
 
         jbGuardarAlum.setText("Guardar");
+        jbGuardarAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarAlumActionPerformed(evt);
+            }
+        });
 
         jbSalirAlum.setText("Salir");
+
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,11 +127,11 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                                 .addGap(102, 102, 102)
                                 .addComponent(jbBuscarAlum))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
+                                .addGap(27, 27, 27)
                                 .addComponent(jbGuardarAlum)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(30, 30, 30)
                                 .addComponent(jbEliminarAlum)
-                                .addGap(28, 28, 28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbSalirAlum))
                             .addComponent(jtApellido, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(67, 67, 67))
@@ -144,15 +152,15 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                     .addComponent(jbBuscarAlum)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jcbEstado))
                 .addGap(18, 18, 18)
@@ -165,7 +173,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                     .addComponent(jbGuardarAlum)
                     .addComponent(jbEliminarAlum)
                     .addComponent(jbSalirAlum))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,15 +188,36 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         Alumno dato = alumnoData.buscarAlumnoPorDni(dni); // Me pide un int dni
         // Ahora se debería mostrar en los otros campos los datos correspondientes al alumno seleccionado
         jtApellido.setText(dato.getApellido());
-        jtNombre.setText(dato.getNombre());
+        jtNombre.setText(dato.getNombre());        
+        jdFechaNac.setDate(Date.valueOf(dato.getFechaNac())); // Parsear/convertir de LocalDate a Date
         jcbEstado.setSelected(dato.isActivo()); // RECORDAR!!!! si es un booleano va "IS" con un setSELECTED
-        jdFechaNac.setDate(Date.valueOf(dato.getFechaNac()));
         
     }//GEN-LAST:event_jbBuscarAlumActionPerformed
 
     private void jbNuevoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoAlumActionPerformed
-        // TODO add your handling code here:
+        // CLICK EN "NUEVO" - SE VINCULA CON "GUARDAR ALUMNO"
+        AlumnoData alumnoData = new AlumnoData();
+        Alumno alumno = new Alumno();
+        
+        //Alumno guardar = alumnoData.guardarAlumno(alumno);
+        
+        // De igual manera que el método anterior, debo parsear los JTextField
+        int dni = Integer.parseInt(jtDni.getText());
+        alumno.setApeliido(jtApellido.getText());
+        alumno.setNombre(jtNombre.getText());
+        alumno.setDni(dni);
+        alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        //alumno.setActivo(jcbEstado.);
+        
     }//GEN-LAST:event_jbNuevoAlumActionPerformed
+
+    private void jbGuardarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarAlumActionPerformed
+        // CLICK EN "GUARDAR" - SE VINCULA CON "
+    }//GEN-LAST:event_jbGuardarAlumActionPerformed
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        
+    }//GEN-LAST:event_jcbEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
