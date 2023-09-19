@@ -2,10 +2,10 @@
 package universidadejemplo.Entidades;
 //cele anduvo por aquí, ¿vamos bien?
 public class Materia {
-    int idMateria;
-    String nombre;
-    int anioMateria;
-    boolean activo;
+    private int idMateria;
+    private String nombre;
+    private int anioMateria;
+    private boolean activo;
 
     public Materia() {
     }
