@@ -3,9 +3,9 @@ package universidadejemplo.Vistas;
 
 import java.awt.Color;
 
-public class Materia extends javax.swing.JInternalFrame {
+public class MateriaView extends javax.swing.JInternalFrame {
 
-    public Materia() {
+    public MateriaView() {
         initComponents();
         getContentPane().setBackground(new Color(0, 128, 128));
     }
@@ -100,10 +100,8 @@ public class Materia extends javax.swing.JInternalFrame {
                         .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jrbEstado)
                             .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
