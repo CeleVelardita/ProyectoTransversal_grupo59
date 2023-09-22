@@ -38,7 +38,6 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         jtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jdFechaNac = new com.toedter.calendar.JDateChooser();
         jbNuevoAlum = new javax.swing.JButton();
         jbEliminarAlum = new javax.swing.JButton();
         jbGuardarAlum = new javax.swing.JButton();
@@ -136,9 +135,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                             .addComponent(jtApellido, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(67, 67, 67))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbEstado)
-                            .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcbEstado)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -163,17 +160,15 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jcbEstado))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel6)
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevoAlum)
                     .addComponent(jbGuardarAlum)
                     .addComponent(jbEliminarAlum)
                     .addComponent(jbSalirAlum))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,11 +198,12 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         
         // De igual manera que el método anterior, debo parsear los JTextField
         int dni = Integer.parseInt(jtDni.getText());
-        alumno.setApeliido(jtApellido.getText());
+        alumno.setApellido(jtApellido.getText());
         alumno.setNombre(jtNombre.getText());
         alumno.setDni(dni);
         alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         //alumno.setActivo(jcbEstado.);
+        
         
     }//GEN-LAST:event_jbNuevoAlumActionPerformed
 
@@ -233,7 +229,6 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbNuevoAlum;
     private javax.swing.JButton jbSalirAlum;
     private javax.swing.JCheckBox jcbEstado;
-    private com.toedter.calendar.JDateChooser jdFechaNac;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtNombre;
