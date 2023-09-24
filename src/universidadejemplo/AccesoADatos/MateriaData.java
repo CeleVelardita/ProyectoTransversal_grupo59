@@ -2,6 +2,7 @@
 package universidadejemplo.AccesoADatos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -83,17 +84,43 @@ public class MateriaData {
     public void modificarMateria(Materia materia){
         String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ?";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);            
+            ps.setString(2, materia.getNombre());
+            ps.setInt(3, materia.getAnioMateria());
+            ps.setBoolean(4, materia.isActivo());
+            
+            // Por último se setea el idMateria
+            ps.setInt(1, materia.getIdMateria());
+            
+            // Luego ejecuto
+            int modificacion = ps.executeUpdate();
+            
+            if(modificacion == 1){
+                JOptionPane.showMessageDialog(null, "Materia modificada");
+            } else{
+                JOptionPane.showMessageDialog(null, "No existe una materia con el código ingresado");
+            }
+            ps.close();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar la materia");
-        }
-        
-    }
-    /*
-    public void eliminarMateria (int id){
-        
+        }        
     }
     
+    public void eliminarMateria (int id){
+        String sql = "UPDATE materia SET estado = 0 WHERE idMateria = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id); // Acá le digo que quiero que reemplace al id por el id que le indiqué
+            int eliminar = ps.executeUpdate();
+            if(eliminar == 1){ // Si encuentra una materia con ese código, la elimina
+                JOptionPane.showMessageDialog(null, "Materia eliminada");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar la materia");
+        }        
+    }
+    /*
     public List<Materia> listarMateria(){
         
     }

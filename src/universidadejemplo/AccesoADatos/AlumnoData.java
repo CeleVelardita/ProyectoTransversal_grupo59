@@ -88,12 +88,12 @@ public class AlumnoData {
             // Por último se setea el ID
             ps.setInt(6, alumno.getIdAlumno());
 
-            //Luego ejecuto, RECORDAR QUE EL MÉTODO executeUpdate DEVUELVE UN ENTERO CON LA CANTIDAD DE FILAS ACEPTADAS
+            // Luego ejecuto, RECORDAR QUE EL MÉTODO executeUpdate DEVUELVE UN ENTERO CON LA CANTIDAD DE FILAS ACEPTADAS (agregadas??)
             int modificacion = ps.executeUpdate();
 
             // Creo un diálogo para que me muestre si se modificó correctamente
             if (modificacion == 1) {
-                JOptionPane.showMessageDialog(null, "El alumno ya existe en la base de datosn \n Alumno modificado");
+                JOptionPane.showMessageDialog(null, "El alumno ya existe en la base de datos. Alumno modificado");
             } else {
                 JOptionPane.showMessageDialog(null, "El alumno no existe");
             }
@@ -114,7 +114,7 @@ public class AlumnoData {
             ps.setInt(1, id); // Acá le digo que quiero que reemplace al id por ese id que le indiqué
             int eliminar = ps.executeUpdate();
             if (eliminar == 1) {
-                JOptionPane.showMessageDialog(null, "Alumno borrado");
+                JOptionPane.showMessageDialog(null, "Alumno eliminado");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el alumno");
