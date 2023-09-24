@@ -2,11 +2,22 @@
 package universidadejemplo.Vistas;
 
 import java.awt.Color;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.AccesoADatos.MateriaData;
+import universidadejemplo.Entidades.Materia;
 
 public class MateriaView extends javax.swing.JInternalFrame {
 
+    private MateriaData materiaData;
+    private Materia materiaActual;
+    
     public MateriaView() {
         initComponents();
+        materiaData = new MateriaData();
+        materiaActual = null;
+        
         getContentPane().setBackground(new Color(0, 128, 128));
     }
 
@@ -39,12 +50,6 @@ public class MateriaView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Código:");
 
-        jtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCodigoActionPerformed(evt);
-            }
-        });
-
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,12 +58,6 @@ public class MateriaView extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setText("Nombre:");
-
-        jtAnio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtAnioActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Año:");
 
@@ -72,10 +71,25 @@ public class MateriaView extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,21 +167,85 @@ public class MateriaView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
+        // CLICK EN "BUSCAR" - SE VINCULA CON "BUSCAR POR ID"
+        try{
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        // Ahora a la materiaActual le mando el código para que la busque en la lista y me tire los datos correspondientes
+        materiaActual = materiaData.buscarMateria(codigo);
+        if(materiaActual != null){
+            jtNombre.setText(materiaActual.getNombre());
+            jtAnio.setText(materiaActual.getAnioMateria()+"");
+            jcbEstado.setSelected(materiaActual.isActivo());
+        }
+        
+        } catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
+            jtCodigo.setText("");
+        }        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        // TODO add your handling code here:
+        // CLICK EN "NUEVO" - LIMPIA LOS CAMPOS
+        limpiarCampos();
+        materiaActual = null; // Recordemos que se setea en null para "volver a cero"
     }//GEN-LAST:event_jbNuevoActionPerformed
 
-    private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCodigoActionPerformed
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        try{
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        String nombre = jtNombre.getText();
+        int anio = Integer.parseInt(jtAnio.getText());
+        boolean estado = jcbEstado.isSelected();
+        
+        //Chequeamos que no haya campos vacíos
+        if(nombre.isEmpty() || anio == 0 ){
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
+            return;
+        }
+        
+        // Ahora se hacen las validaciones correspondientes para saber si es una nueva materia o si hay que modificarla
+        
+        if(materiaActual == null){ //si está vacío es porque es NUEVO
+            materiaActual = new Materia(nombre, anio, estado);
+            materiaData.guardarMateria(materiaActual);
+            limpiarCampos();
+        } else{ // si no está vacío, debo MODIFICAR
+            materiaActual.setIdMateria(codigo);
+            materiaActual.setNombre(nombre);
+            materiaActual.setAnioMateria(anio);
+            materiaActual.setActivo(estado);
+            
+            materiaData.modificarMateria(materiaActual);
+            limpiarCampos();            
+        }
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
+        }        
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jtAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAnioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtAnioActionPerformed
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // CLICK EN "ELIMINAR" - SE VINCULA CON "ELIMINAR MATERIA"
+        // Si al buscar por código se encuentra una materia, materiaActual deja de estar en modo "null"
+        if(materiaActual != null){
+            materiaData.eliminarMateria(materiaActual.getIdMateria()); // La elimino por el ID o código
+            materiaActual = null; // vuelco a setear en null a la materia
+            limpiarCampos();
+        } else{
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna materia");
+        }
+        
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void limpiarCampos(){ // Creo un método para que se limpie la pantalla
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jtAnio.setText("");
+        jcbEstado.setSelected(false);
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
