@@ -27,9 +27,10 @@ public class AlumnoData {
         // el método .getConexion es el que establece la conexión a la BD
     }
     
+    
     // El método guardarAlumno hace un INSERT en la tabla Alumno
     
-    public void guardarAlumno (Alumno alumno){
+    public void guardarAlumno (Alumno alumno) {
         // Se prepara la sentencia que se va a enviar a la BD
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado)"
                 + "VALUES(?, ?, ?, ?, ?)"; // Van signos de pregunta porque van a ser reemplazados por lo que se ingrese en Alumno
@@ -51,23 +52,27 @@ public class AlumnoData {
         ps.executeUpdate();
         
         // Luego se pide la clave generada al alumno
-        // Devuelve una tabla, en este caso con una sola columna que es la dle ID, con tantas filas
-        // com alumnos haya cargado        
+        // Devuelve una tabla, en este caso con una sola columna que es la de ID, con tantas filas
+        // como alumnos haya cargado        
         ResultSet claveAlumno = ps.getGeneratedKeys();
+        
         // En este caso le manda un solo alumno por lo que no es necesario recorrer la lista con un while
         // el next me indica que pasa al siguiente renglón, entonces significa que lo pudo agregar
         if (claveAlumno.next()){
             alumno.setIdAlumno(claveAlumno.getInt(1));
             JOptionPane.showMessageDialog(null, "Alumno Guardado");
         }
+        
         // Cierro el método prepareStatement
         ps.close();        
         
         } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
-            
+            JOptionPane.showMessageDialog(null, "Error al guardar al alumno"+ex.getMessage());            
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Error al guardar al alumno"+ex.getMessage());
         }
     }
+    
     
     //El método modificarAlumno hace un UPDATE en la tabla, lo modifica
     
@@ -88,14 +93,14 @@ public class AlumnoData {
 
             // Creo un diálogo para que me muestre si se modificó correctamente
             if (modificacion == 1) {
-                JOptionPane.showMessageDialog(null, "Alumno modificado");
+                JOptionPane.showMessageDialog(null, "El alumno ya existe en la base de datosn \n Alumno modificado");
             } else {
                 JOptionPane.showMessageDialog(null, "El alumno no existe");
             }
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
+            JOptionPane.showMessageDialog(null, "Error al modificar el alumno");
         }
     }
 
@@ -112,7 +117,7 @@ public class AlumnoData {
                 JOptionPane.showMessageDialog(null, "Alumno borrado");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla alumnos");
+            JOptionPane.showMessageDialog(null, "Error al eliminar el alumno");
         }
 
     }
@@ -134,7 +139,7 @@ public class AlumnoData {
                 // Empiezo a setear:
                 alumno.setIdAlumno(id);
                 alumno.setDni(buscarId.getInt("dni"));
-                alumno.setApeliido(buscarId.getString("apellido"));
+                alumno.setApellido(buscarId.getString("apellido"));
                 alumno.setNombre(buscarId.getString("nombre"));
                 alumno.setFechaNac(buscarId.getDate("fechaNacimiento").toLocalDate());
                 alumno.setActivo(true);
@@ -162,7 +167,7 @@ public class AlumnoData {
             if(buscarDni.next()){ // Si se encuentra un alumno con ese dni, entonces... se crea un nuevo objeto alumno y se guardar ahí los datos del alumno encontrado
                 alumno = new Alumno();
                 alumno.setIdAlumno(buscarDni.getInt("idAlumno"));
-                alumno.setApeliido(buscarDni.getString("apellido"));
+                alumno.setApellido(buscarDni.getString("apellido"));
                 alumno.setNombre(buscarDni.getString("nombre"));
                 alumno.setFechaNac(buscarDni.getDate("fechaNacimiento").toLocalDate());
                 alumno.setActivo(buscarDni.getBoolean("estado"));           
@@ -195,7 +200,7 @@ public class AlumnoData {
                 // Luego a ese alumno, hay que setearle todos los datos
                 alumno.setIdAlumno(listaAlumnos.getInt("idalumno"));
                 alumno.setDni(listaAlumnos.getInt("dni"));
-                alumno.setApeliido(listaAlumnos.getString("apellido"));
+                alumno.setApellido(listaAlumnos.getString("apellido"));
                 alumno.setNombre(listaAlumnos.getString("nombre"));
                 alumno.setFechaNac(listaAlumnos.getDate("fechaNacimiento").toLocalDate());
                 alumno.setActivo(true);
