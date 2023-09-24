@@ -56,16 +56,40 @@ public class MateriaData {
         }
     }
 
-    
-    /*
-    public Materia buscarMateria(int id){
-    //return materia;
-    }
+    public Materia buscarMateria(int id) {
+        String sql = "SELECT nombre, año, estado FROM materia WHERE idMateria = ? AND estado = 1";
+        Materia materia = null; // Lo seteo a null para que "arranque de cero"
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet buscarId = ps.executeQuery();
+            // Como lo que devuelve es una única fila va in if, en caso de ser una lista, va a un while
+            if(buscarId.next()){
+                materia = new Materia();
+                // Luego de crear una nueva materia en la línea anterior, empiezo a setear
+                materia.setNombre(buscarId.getString("nombre"));
+                materia.setAnioMateria(buscarId.getInt("año"));
+                materia.setActivo(buscarId.getBoolean("estado"));
+            } else{ // Si en el ResultSet no encuentra un elemento...
+                JOptionPane.showMessageDialog(null, "No se ha encontrado la materia ingresada");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla materia");
+        }
+        return materia;
+    }    
     
     public void modificarMateria(Materia materia){
+        String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar la materia");
+        }
         
     }
-    
+    /*
     public void eliminarMateria (int id){
         
     }

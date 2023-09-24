@@ -126,13 +126,13 @@ public class AlumnoData {
         // Recordar que para buscar un "dato" en la BD se hace con un SELECT
         String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno = ? AND estado = 1";
         // NOTA: el ID del alumno es un parámetro dinámico
-        Alumno alumno = null;
+        Alumno alumno = null; // Lo vuelvo null para que "arranque de cero"
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet buscarId = ps.executeQuery();
             // Como me devuelve una única fila va...
-            if (buscarId.next()) { // "Si en el Result Set hay un elemento, entonces...
+            if (buscarId.next()) { // "Si en el ResultSet hay un elemento, entonces...
                 // Voy seteando cada parámetro con los datos del alumno correspondientes al id que se ingresó
                 // Pero para esto, primero creo un objeto alumno de tipo Alumno seteado en null (antes del try)
                 alumno = new Alumno(); // Creo un nuevo alumno, con el constructor vacío
