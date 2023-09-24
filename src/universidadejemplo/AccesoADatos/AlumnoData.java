@@ -189,30 +189,30 @@ public class AlumnoData {
       String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE estado = 1";
       // Otra posibilidad es "SELECT * FROM alumno WHERE estado = 1", recordar que el * invoca todos los parámetros
       // Creo una lista de alumnos porque me va a devolver una lista de TODOS los alumnos que se encuentren activos
-      ArrayList<Alumno> alumnos = new ArrayList<>();
+      ArrayList<Alumno> listaAlumnos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet listaAlumnos = ps.executeQuery();
+            ResultSet alumnos = ps.executeQuery();
             // En este caso, a diferencia de los demás,  la lista me devuelve MÁS DE UNA fila, por eso la recorro con un WHILE y NO con un IF
-            while (listaAlumnos.next()) {                
+            while (alumnos.next()) {                
                 // Mientras haya elementos en esa fila, le digo que se cree un alumno vacío
                 Alumno alumno = new Alumno();
                 // Luego a ese alumno, hay que setearle todos los datos
-                alumno.setIdAlumno(listaAlumnos.getInt("idalumno"));
-                alumno.setDni(listaAlumnos.getInt("dni"));
-                alumno.setApellido(listaAlumnos.getString("apellido"));
-                alumno.setNombre(listaAlumnos.getString("nombre"));
-                alumno.setFechaNac(listaAlumnos.getDate("fechaNacimiento").toLocalDate());
+                alumno.setIdAlumno(alumnos.getInt("idalumno"));
+                alumno.setDni(alumnos.getInt("dni"));
+                alumno.setApellido(alumnos.getString("apellido"));
+                alumno.setNombre(alumnos.getString("nombre"));
+                alumno.setFechaNac(alumnos.getDate("fechaNacimiento").toLocalDate());
                 alumno.setActivo(true);
                 // Finalmente a la lista "alumnos" le agrego (add) ese alumno
-                alumnos.add(alumno);
+                listaAlumnos.add(alumno);
             }
             
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla alumnos");
         }
-     return alumnos;
+     return listaAlumnos;
     }
          
     

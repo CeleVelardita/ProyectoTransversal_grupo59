@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -120,11 +121,31 @@ public class MateriaData {
             JOptionPane.showMessageDialog(null, "Error al eliminar la materia");
         }        
     }
-    /*
-    public List<Materia> listarMateria(){
-        
+    
+    public List<Materia> listarMateria() {
+        String sql = "SELECT * FROM materia WHERE estado = 1";
+        ArrayList<Materia> listaMaterias = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet mat = ps.executeQuery();
+            // Recordar que en este caso el resultSet me devuelve más de una fila
+            while (mat.next()) { // Mientras haya elementos en esa fila...
+                Materia materia = new Materia();
+                // Una vez que creo el nuevo objeto materia, le seteo todos los parámetros que se ingresaron
+                materia.setIdMateria(mat.getInt("idMateria"));
+                materia.setNombre(mat.getString("nombre"));
+                materia.setAnioMateria(mat.getInt("año"));
+                materia.setActivo(mat.getBoolean("estado"));
+                // Por último agrego la materia con todos sus atributos a la lista
+                listaMaterias.add(materia);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla materia");
+        }        
+        return listaMaterias;
     }
-    */
+    
     
     
     
