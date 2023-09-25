@@ -16,28 +16,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.JOptionPane;
 import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Inscripcion;
 import universidadejemplo.Entidades.Materia;
 
 public class InscripcionData {
-    private Connection con = null;
-    private MateriaData md = new MateriaData();   
-    private AlumnoData ad = new AlumnoData(); 
+    private Connection con=null;
+    private MateriaData md=new MateriaData();   
+    private AlumnoData ad=new AlumnoData(); 
     
     /* ATENCIÓN!!!!!!!!!!!!!!
-    esos 2 últimos objetos md y ad de tipo MateriaData y AlumnoData respectivamente
+    esos 2 último objetos md y ad de tipo MateriaData y AlumnoData respectivamente
     son para poder utilizar los métodos de esas clases (estamos en la clase inscripcionData)
     a la hora de querer acceder a la base de datos y querer manipular las tablas para 
     recuperar la info deseada al recorrer la tabla en un while más adelante
     */
     
     public InscripcionData(){
-        this.con = Conexion.getConexion();
+        this.con=Conexion.getConexion();
     }
     
     public void guardarInscripcion(Inscripcion insc){
@@ -53,11 +50,11 @@ public class InscripcionData {
             ps.setInt(2, insc.getMateria().getIdMateria());
             ps.setDouble(3, insc.getNota());
             ps.executeUpdate();
-            //voy a recibir claves que me confiermen que se pudo SETear y las guardo en un tipo result
-            ResultSet rs=ps.getGeneratedKeys();
+            //voy a recibir claves que me confirmen que se pudo SETear y las guardo en un tipo result
+            ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
                 insc.setIdInscripcion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Inscripción REgistrada");
+                JOptionPane.showMessageDialog(null, "Inscripción Registrada");
             }
             ps.close();        
         } catch (SQLException ex) {
@@ -98,7 +95,7 @@ public class InscripcionData {
             while(rs.next()){
                 Inscripcion insc=new Inscripcion();
                 insc.setIdInscripcion(rs.getInt("idInscripto"));
-                Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
+                Alumno alu=ad.buscarAlumnoPorId(rs.getInt("idAlumno"));
                 //ad.buscarAlumno pide el idAlumno
                 //rs.getInt("idAlumno") obtiene el idAlumno y se lo pasa al método
                 //Alumno alu (carpeta entidades) almacena el idAlumno obtenido
@@ -123,7 +120,9 @@ public class InscripcionData {
         return cursadas;
         //prueba en el main del proyecto
     }
-            
+    
+    
+    
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno){
         //Método que devuelve una lista de inscripciones
         ArrayList<Inscripcion> cursadas= new ArrayList<>(); //esta lista está vacía todavía
@@ -139,9 +138,7 @@ public class InscripcionData {
             while(rs.next()){
                 Inscripcion insc=new Inscripcion();
                 insc.setIdInscripcion(rs.getInt("idInscripto"));
-                
-                Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
-                
+                Alumno alu=ad.buscarAlumnoPorId(rs.getInt("idAlumno"));
                 //ad.buscarAlumno pide el idAlumno
                 //rs.getInt("idAlumno") obtiene el idAlumno y se lo pasa al método
                 //Alumno alu (carpeta entidades) almacena el idAlumno obtenido
@@ -167,14 +164,19 @@ public class InscripcionData {
         //prueba en el main del proyecto
         
     }
-        
+    
+    
+    
+    
+    
+    
     public List<Materia> obtenerMateriasCursadas(int idAlumno){
         
         ArrayList<Materia> materias= new ArrayList();
         
         String sql= "SELECT inscripcion.idMateria, nombre, año FROM incripcion,"
-                    +" materia WHERE incripcion.idMateria = materia.idMateria"
-                    +"AND isncripcion.idAlumno = ? ;";
+                    + " materia WHERE incripcion.idMateria = materia.idMateria "
+                    +" AND isncripcion.idAlumno = ? ;";
         /*Necesitamos solo las materias donde el alumno está inscripto
         en el  FROM tengo un producto carteciano y no tengo JOIN, es decir,
         uno las tablas inscripcion y materia con una ","
@@ -205,7 +207,10 @@ public class InscripcionData {
         
         return materias;   
     }
-        
+    
+    
+    
+    
     public List<Materia> obtenerMateriasNOCursadas(int idAlumno){
         ArrayList<Materia> materias= new ArrayList();
         
@@ -243,13 +248,13 @@ public class InscripcionData {
         return materias;
     }
      
-    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMAteria){
+    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
         //borrado físico
         String sql= "DELETE FROM inscripcion WHERE idAlumno =? and idMAteria=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, idAlumno);
-            ps.setInt(2, idAlumno);
+            ps.setInt(2, idMateria);
             
             int filas=ps.executeUpdate(); //el executeUpdate devuelve un entero
             if(filas>0){
@@ -279,8 +284,8 @@ public class InscripcionData {
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setDouble( 1, nota);
-            ps.setInt( 1, idAlumno);
-            ps.setInt( 3, idAlumno);
+            ps.setInt( 2, idAlumno);
+            ps.setInt( 3, idMateria);
             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
@@ -332,4 +337,48 @@ public class InscripcionData {
         return alumnosMateria;
     }
     
+    
+    
+    /*-----------------------------------------------------------------------------------------------------------------*/
+    
+    
+    /*APARTADO método para la vista AdministracionView_ManipulacionDeNotas*/
+    public List<Inscripcion> obtenerNotasDeMaterias(int idAlumno){
+        ArrayList<Inscripcion> inscripto= new ArrayList<>();
+        
+        String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria not in "
+                    + "(SELECT idMateria FROM incripcion WHERE idAlumno=?)";
+        /*Explicación del sql
+          subconsulta (SELECT idMateria FROM incripcion WHERE idAlumno=?) -> materias donde está inscripto el alumno
+          SELECT * FROM materia -> pide todas las materias
+          WHERE estado = 1 que esas materias tengan estado 1, estén activas  
+          AND idMateria not in -> que no estén en la lista de materias donde el alumno esté insrcipto
+        
+        
+          conclusión: pide todas las materias que estén activas 
+          y NO se encuentren en la lista de materias donde el alumno esté inscripto
+        */
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idAlumno); //idAlumno pasado por parámetro
+            ResultSet rs=ps.executeQuery();//donde almacnamos la respuesta de la BD
+            //Ahora comenzamos a recorrer
+            while(rs.next()){
+                Inscripcion insc=new Inscripcion();
+                insc.setId_Materia(rs.getInt("idMateria"));
+                insc.setNombreMateria(rs.getString("nombre"));
+                insc.setNota(rs.getInt("nota"));
+                //ya obtuvimos los datos, ahora agregarlos a arraylist inscripto
+                inscripto.add(insc);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+        }
+        
+        return inscripto;
+    }
+/*-----------------------------------------------------------------------------------------------------------------*/    
+
 }

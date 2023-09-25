@@ -1,7 +1,7 @@
 package universidadejemplo.Vistas;
 
 
-import universidadejemplo.Vistas.Consultas_AlumnosPorMateria;
+import universidadejemplo.Vistas.ConsultasView_AlumnosPorMateria;
 
 public class Vistas extends javax.swing.JFrame {
 
@@ -122,10 +122,6 @@ public class Vistas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
-       
-    }//GEN-LAST:event_jmConsultasActionPerformed
-
     private void jmConsultas_AlumPorMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultas_AlumPorMateriaActionPerformed
         //CLICK EN "CONSULTAS - ALUMNOS POR MATERIA"
         
@@ -133,7 +129,7 @@ public class Vistas extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
         //instancio una variable de la ventana Consultas MateriaView por MateriaView
-        Consultas_AlumnosPorMateria consulta = new Consultas_AlumnosPorMateria();
+        ConsultasView_AlumnosPorMateria consulta = new ConsultasView_AlumnosPorMateria();
         //por defecto la ventana está invisible, la hago visible:
         consulta.setVisible(true);
         //agrego la ventana consulta al escritorio principal
@@ -186,7 +182,7 @@ public class Vistas extends javax.swing.JFrame {
         
         escritorio.removeAll();
         escritorio.repaint();
-        Administracion_Manejo_de_Inscripciones inscripciones = new Administracion_Manejo_de_Inscripciones();
+        AdministracionView_ManejoDeInscripciones inscripciones = new AdministracionView_ManejoDeInscripciones();
         inscripciones.setVisible(true);
         escritorio.add(inscripciones);
         escritorio.moveToBack(inscripciones);       
@@ -197,18 +193,28 @@ public class Vistas extends javax.swing.JFrame {
         
         escritorio.removeAll();
         escritorio.repaint();
-        Administracion_Manipulacion_De_Notas notas = new Administracion_Manipulacion_De_Notas();
+        AdministracionView_ManipulacionDeNotas notas = new AdministracionView_ManipulacionDeNotas();
         notas.setVisible(true);
         escritorio.add(notas);
         escritorio.moveToBack(notas);
     }//GEN-LAST:event_jmNotasActionPerformed
 
-    
-    
-    
-    /**
-     * @param args the command line arguments
-     */
+    private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
+       //CLICK EN "CONSULTAS - ALUMNOS POR MATERIA"
+        
+        // Limpio la ventana 
+        escritorio.removeAll();
+        escritorio.repaint();
+        //instancio una variable de la ventana Consultas MateriaView por MateriaView
+        ConsultasView_AlumnosPorMateria consulta = new ConsultasView_AlumnosPorMateria();
+        //por defecto la ventana está invisible, la hago visible:
+        consulta.setVisible(true);
+        //agrego la ventana consulta al escritorio principal
+        escritorio.add(consulta);
+        //traigo al frente la ventana consulta
+        escritorio.moveToFront(consulta);   
+    }//GEN-LAST:event_jmConsultasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
