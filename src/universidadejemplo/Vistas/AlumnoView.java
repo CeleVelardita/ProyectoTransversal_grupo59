@@ -3,17 +3,24 @@ package universidadejemplo.Vistas;
 
 import java.awt.Color;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.Entidades.Alumno;
 
 public class AlumnoView extends javax.swing.JInternalFrame {
+    
+    // Creo estos atributos acá porque me di cuenta que los uso en todos los métodos
+    private AlumnoData alumnoData;
+    private Alumno alumnoActual;
 
     public AlumnoView() {
         initComponents();
-        
+        alumnoData = new AlumnoData();
+        alumnoActual = null;
         //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel (LO LOGRÉ!!!)
         getContentPane().setBackground(new Color(0, 128, 128));
          
@@ -38,9 +45,10 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         jtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jbNuevoAlum = new javax.swing.JButton();
-        jbEliminarAlum = new javax.swing.JButton();
+        jdFechaNac = new com.toedter.calendar.JDateChooser();
         jbGuardarAlum = new javax.swing.JButton();
+        jbEliminarAlum = new javax.swing.JButton();
+        jbNuevoAlum = new javax.swing.JButton();
         jbSalirAlum = new javax.swing.JButton();
         jcbEstado = new javax.swing.JCheckBox();
 
@@ -70,15 +78,6 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha de Nacimiento:");
 
-        jbNuevoAlum.setText("Nuevo");
-        jbNuevoAlum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbNuevoAlumActionPerformed(evt);
-            }
-        });
-
-        jbEliminarAlum.setText("Eliminar");
-
         jbGuardarAlum.setText("Guardar");
         jbGuardarAlum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,11 +85,24 @@ public class AlumnoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jbSalirAlum.setText("Salir");
-
-        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+        jbEliminarAlum.setText("Eliminar");
+        jbEliminarAlum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbEstadoActionPerformed(evt);
+                jbEliminarAlumActionPerformed(evt);
+            }
+        });
+
+        jbNuevoAlum.setText("Nuevo");
+        jbNuevoAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoAlumActionPerformed(evt);
+            }
+        });
+
+        jbSalirAlum.setText("Salir");
+        jbSalirAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirAlumActionPerformed(evt);
             }
         });
 
@@ -112,8 +124,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jbNuevoAlum)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(jLabel6))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -126,16 +137,18 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                                 .addGap(102, 102, 102)
                                 .addComponent(jbBuscarAlum))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
+                                .addGap(35, 35, 35)
                                 .addComponent(jbGuardarAlum)
-                                .addGap(30, 30, 30)
+                                .addGap(27, 27, 27)
                                 .addComponent(jbEliminarAlum)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbSalirAlum))
                             .addComponent(jtApellido, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(67, 67, 67))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcbEstado)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbEstado)
+                            .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -160,15 +173,17 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jcbEstado))
-                .addGap(20, 20, 20)
-                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevoAlum)
+                    .addComponent(jbSalirAlum)
                     .addComponent(jbGuardarAlum)
-                    .addComponent(jbEliminarAlum)
-                    .addComponent(jbSalirAlum))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(jbEliminarAlum))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -176,44 +191,99 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
     private void jbBuscarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarAlumActionPerformed
         // CLICK EN "BUSCAR" - SE VINCULA CON "BUSCAR ALUMNO POR DNI"
-        AlumnoData alumnoData = new AlumnoData();
-        
-        // Debo parsear/convertir a un int el número que se ingresa en el JTextField
-        int dni = Integer.parseInt(jtDni.getText());
-        Alumno dato = alumnoData.buscarAlumnoPorDni(dni); // Me pide un int dni
-        // Ahora se debería mostrar en los otros campos los datos correspondientes al alumno seleccionado
-        jtApellido.setText(dato.getApellido());
-        jtNombre.setText(dato.getNombre());        
-        jdFechaNac.setDate(Date.valueOf(dato.getFechaNac())); // Parsear/convertir de LocalDate a Date
-        jcbEstado.setSelected(dato.isActivo()); // RECORDAR!!!! si es un booleano va "IS" con un setSELECTED
-        
+
+        try {
+            // Debo parsear/convertir a un int el número que se ingresa en el JTextField
+            int dni = Integer.parseInt(jtDni.getText());
+            alumnoActual = alumnoData.buscarAlumnoPorDni(dni); // Me pide un int dni
+            // NOTA: Recordar que el método buscar por Dni se ocupa de validar si ese alumno ya está cargado o no
+
+            // También valido que el campo de dni no sea nulo
+            if (alumnoActual != null) {
+                // Ahora se debería mostrar en los otros campos los datos correspondientes al alumno seleccionado
+                jtApellido.setText(alumnoActual.getApellido());
+                jtNombre.setText(alumnoActual.getNombre());
+                jdFechaNac.setDate(Date.valueOf(alumnoActual.getFechaNac())); // Parsear/convertir de LocalDate a Date
+                jcbEstado.setSelected(alumnoActual.isActivo()); // RECORDAR!!!! si es un booleano va "IS" con un setSELECTED
+            } 
+        } catch (NumberFormatException e) {
+            // como en este caso el mensaje lo lanzaría desde esta ventana, en el JOption va "this" en lugar de "null"
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
+            jtDni.setText("");
+        }
     }//GEN-LAST:event_jbBuscarAlumActionPerformed
 
-    private void jbNuevoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoAlumActionPerformed
-        // CLICK EN "NUEVO" - SE VINCULA CON "GUARDAR ALUMNO"
-        AlumnoData alumnoData = new AlumnoData();
-        Alumno alumno = new Alumno();
-        
-        //Alumno guardar = alumnoData.guardarAlumno(alumno);
-        
-        // De igual manera que el método anterior, debo parsear los JTextField
-        int dni = Integer.parseInt(jtDni.getText());
-        alumno.setApellido(jtApellido.getText());
-        alumno.setNombre(jtNombre.getText());
-        alumno.setDni(dni);
-        alumno.setFechaNac(jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        //alumno.setActivo(jcbEstado.);
-        
-        
-    }//GEN-LAST:event_jbNuevoAlumActionPerformed
-
     private void jbGuardarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarAlumActionPerformed
-        // CLICK EN "GUARDAR" - SE VINCULA CON "
+        // CLICK EN "GUARDAR" - SE VINCULA CON "GUARDAR ALUMNO" Y CON "MODIFICAR ALUMNO"
+
+        try {
+            // De igual manera que el método anterior, debo parsear los JTextField
+            // y rescatar los datos de cada uno de los campos, pero en este caso, para validar si
+            // ese alumno ya existe o no. No lo seteo de una.
+            int dni = Integer.parseInt(jtDni.getText());
+            String apellido = jtApellido.getText();
+            String nombre = jtNombre.getText();
+            LocalDate fechaNac = jdFechaNac.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Boolean estado = jcbEstado.isSelected();
+
+            // Verifico que no queden campos vacíos
+            if (apellido.isEmpty() || nombre.isEmpty() || fechaNac == null) {
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
+                return; // con el return sale del método
+            }
+
+            if (alumnoActual == null) { // Si alumnoActual está en nulo, es porque es un alumno nuevo
+                // ahora sí, le mando todos los datos por el constructor sin el ID
+                alumnoActual = new Alumno(dni, apellido, nombre, fechaNac, estado);
+                // Como se crea un nuevo alumno, llamamos al método "GUARDAR ALUMNO"
+                alumnoData.guardarAlumno(alumnoActual);
+                limpiarCampos();
+            } else { // si no está en nulo es porque ese alumno con ese dni ya existe y se está modificando
+                alumnoActual.setDni(dni);
+                alumnoActual.setApellido(apellido);
+                alumnoActual.setNombre(nombre);
+                alumnoActual.setActivo(estado);
+                alumnoActual.setFechaNac(fechaNac);
+                // Como se modifica un alumno, llamamos al método "MODIFICAR ALUMNO"
+                alumnoData.modificarAlumno(alumnoActual);
+                limpiarCampos();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
+        }
     }//GEN-LAST:event_jbGuardarAlumActionPerformed
 
-    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-        
-    }//GEN-LAST:event_jcbEstadoActionPerformed
+    private void jbNuevoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoAlumActionPerformed
+        // CLICK EN "NUEVO" - LIMPIA LOS CAMPOS 
+
+        limpiarCampos();
+        alumnoActual = null; // Lo seteo en nulo para poder empezar de cero
+    }//GEN-LAST:event_jbNuevoAlumActionPerformed
+
+    private void jbEliminarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarAlumActionPerformed
+        // CLICK EN "ELIMINAR" - SE VINCULA CON EL MÉTODO "ELIMINAR ALUMNO"
+
+        // Si alumnoActual no está nulo, si buscamos un alumno y se encontró...
+        if (alumnoActual != null) {
+            alumnoData.eliminarAlumno(alumnoActual.getIdAlumno());
+            alumnoActual = null;
+            limpiarCampos();
+        } else { // Ahora si alumnoActual está nulo, es porque no se ha seleccionado un alumno
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado un alumno");
+        }
+    }//GEN-LAST:event_jbEliminarAlumActionPerformed
+    
+    private void jbSalirAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirAlumActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirAlumActionPerformed
+
+    private void limpiarCampos(){ // Creo un método para que se limpie la pantalla
+        jtDni.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jcbEstado.setSelected(false);
+        jdFechaNac.setDate(null);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -229,6 +299,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbNuevoAlum;
     private javax.swing.JButton jbSalirAlum;
     private javax.swing.JCheckBox jcbEstado;
+    private com.toedter.calendar.JDateChooser jdFechaNac;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtNombre;
