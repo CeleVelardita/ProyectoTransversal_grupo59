@@ -2,21 +2,35 @@
 package universidadejemplo.Vistas;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JInternalFrame;
+import javax.swing.table.DefaultTableModel;
+import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
+import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Materia;
 
-public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
+public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame {
 
-    public Consultas_AlumnosPorMateria() {
-        initComponents();
-        
+    //modelo de la tabla 
+    private DefaultTableModel modeloTabla;
+    
+    
+    
+    
+    
+    public ConsultasView_AlumnosPorMateria() {
+        initComponents();        
         //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel (LO LOGRÉ!!!)
         JInternalFrame frame = new JInternalFrame();
         getContentPane().setBackground(new Color(0, 128, 128));
         
+        
+        modeloTabla = new DefaultTableModel();
+        cargarComboBoxMaterias();
+        armarCabeceraTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -115,8 +129,7 @@ public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
 
     private void jcbMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriaActionPerformed
         // éste evento se ejecuta al hacer click en el jcombobox 
-        armarCombo();
-        
+        cargarAlumnosxMateria();
     }//GEN-LAST:event_jcbMateriaActionPerformed
 
 
@@ -129,31 +142,60 @@ public class Consultas_AlumnosPorMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtListaDeAlumnos;
     // End of variables declaration//GEN-END:variables
 
-private void armarCombo(){
-    // Limpia el JComboBox
-        jcbMateria.removeAllItems();
-    
-    //para el jcombobox necesito los métodos de este objeto para recuperar de la BD 
-    MateriaData materiaData = new MateriaData(); //declaro e inicializo
-     
-    // Obtener la lista de materias
-    List<Materia> listaMaterias = materiaData.listarMateria();
-        
-    //Creamos un Modelo que almacenará los nombres de la materia 
-     DefaultComboBoxModel<Materia> comboBoxModel = new DefaultComboBoxModel<>();
-    
-    
-    
-    for (Materia materia : listaMaterias) {
-        comboBoxModel.addElement(materia); // Agregamos el objeto Materia directamente
+    private void cargarComboBoxMaterias(){
+        // Limpia el JComboBox
+            jcbMateria.removeAllItems();
+
+        //para el jcombobox necesito los métodos de este objeto para recuperar de la BD 
+        MateriaData materiaData = new MateriaData(); //declaro e inicializo
+
+        // Obtener la lista de materias
+        List<Materia> listaMaterias = materiaData.listarMateria();
+
+        //Creamos un Modelo que almacenará los nombres de la materia 
+         DefaultComboBoxModel<Materia> comboBoxModel = new DefaultComboBoxModel<>();
+
+        for (Materia materia : listaMaterias) {
+            comboBoxModel.addElement(materia); // Agregamos el objeto Materia directamente
+        }
+
+       // Establecer el modelo en el JComboBox
+       jcbMateria.setModel(comboBoxModel);
     }
-    // for (TipoDeElemento elemento : colección) {
-    //    // Código para trabajar con cada elemento
-    //}
     
-    
-   // Establecer el modelo en el JComboBox
-   jcbMateria.setModel(comboBoxModel);
-}
-////incompatible types: DefaultComboBoxModel<Object> cannot be converted to comboBoxModel<Materia>
+    private void armarCabeceraTabla(){
+         ArrayList<Object> filaCabecera = new  ArrayList<>();
+         filaCabecera.add("ID");
+         filaCabecera.add("DNI");
+         filaCabecera.add("Apellido");
+         filaCabecera.add("Nombre");
+         
+         for(Object it: filaCabecera){
+             modeloTabla.addColumn(it);
+         }
+         jtListaDeAlumnos.setModel(modeloTabla);
+    }
+
+    private void borrarFilaDeTabla(){
+        int indice = modeloTabla.getRowCount() -1;
+        for(int i = indice ; i >= 0 ; i--){
+            modeloTabla.removeRow(i);           
+        }
+    }
+
+    private void cargarAlumnosxMateria(){
+        //limpiamos tabla
+        borrarFilaDeTabla();
+        //recuperamos la materia desde el combobox
+        Materia materia= (Materia)jcbMateria.getSelectedItem();
+        //obtenemos el id de esa materia    
+        int idMateria=materia.getIdMateria();
+        //mandamos ese idMateria al método obtenerAlumnoxMateria que lo espera como parametro y almacenamos el ArrayList que nos devolverá
+        InscripcionData insc= new InscripcionData();//para usar el método de InscripcionData
+        ArrayList<Alumno> listaAlumnos=(ArrayList<Alumno>)insc.obtenerAlumnosXMateria(idMateria);
+        //mostramos en tabla la lista fila por fila (alumno por alumno)
+        for(Alumno a: listaAlumnos){
+            modeloTabla.addRow(new Object[]{a.getIdAlumno(),a.getDni(), a.getApellido() , a.getNombre()});
+        }
+    }
 }
