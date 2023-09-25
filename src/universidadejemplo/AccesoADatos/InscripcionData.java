@@ -36,11 +36,11 @@ public class InscripcionData {
             ps.setInt(2, insc.getMateria().getIdMateria());
             ps.setDouble(3, insc.getNota());
             ps.executeUpdate();
-            //voy a recibir claves que me confiermen que se pudo SETear y las guardo en un tipo result
-            ResultSet rs=ps.getGeneratedKeys();
+            //voy a recibir claves que me confirmen que se pudo SETear y las guardo en un tipo result
+            ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
                 insc.setIdInscripcion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Inscripción REgistrada");
+                JOptionPane.showMessageDialog(null, "Inscripción Registrada");
             }
         
         
