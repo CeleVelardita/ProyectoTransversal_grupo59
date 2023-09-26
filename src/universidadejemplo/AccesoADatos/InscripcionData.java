@@ -367,7 +367,7 @@ public class InscripcionData {
                 Inscripcion insc=new Inscripcion();
                 insc.setId_Materia(rs.getInt("idMateria"));
                 insc.setNombreMateria(rs.getString("nombre"));
-                insc.setNota(rs.getInt("nota"));
+                insc.setNota(rs.getDouble("nota"));
                 //ya obtuvimos los datos, ahora agregarlos a arraylist inscripto
                 inscripto.add(insc);
             }

@@ -104,6 +104,11 @@ public class Vistas extends javax.swing.JFrame {
         jMenuBar2.add(jmConsultas);
 
         jmSalir.setText("Salir");
+        jmSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSalirActionPerformed(evt);
+            }
+        });
         jMenuBar2.add(jmSalir);
 
         setJMenuBar(jMenuBar2);
@@ -214,6 +219,10 @@ public class Vistas extends javax.swing.JFrame {
         //traigo al frente la ventana consulta
         escritorio.moveToFront(consulta);   
     }//GEN-LAST:event_jmConsultasActionPerformed
+
+    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jmSalirActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

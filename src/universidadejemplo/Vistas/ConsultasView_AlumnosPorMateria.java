@@ -86,6 +86,11 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
         }
 
         jbSalirConsulta.setText("Salir");
+        jbSalirConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirConsultaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,6 +136,10 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
         // éste evento se ejecuta al hacer click en el jcombobox 
         cargarAlumnosxMateria();
     }//GEN-LAST:event_jcbMateriaActionPerformed
+
+    private void jbSalirConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirConsultaActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirConsultaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

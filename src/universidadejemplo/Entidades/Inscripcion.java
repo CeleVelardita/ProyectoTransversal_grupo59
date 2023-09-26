@@ -16,7 +16,7 @@ public class Inscripcion {
     /*-------Apartado para AdministracionView_ManipulacionDeNotas---------------*/
     private String nombreMateria; //es para AdministracionView_ManipulacionDeNotas 
     private int id_Materia;
-    //Constructor vacío
+    //Constructor para AdministracionView_ManipulacionDeNotas
     public Inscripcion(int id_Materia, String nombreMateria, double nota) {
         this.id_Materia = id_Materia;
         this.nombreMateria = nombreMateria;
