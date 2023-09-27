@@ -210,6 +210,7 @@ public class MateriaView extends javax.swing.JInternalFrame {
             materiaData.guardarMateria(materiaActual);
             limpiarCampos();
         } else{ // si no está vacío, debo MODIFICAR
+            materiaActual = new Materia(codigo, nombre, anio, estado);
             materiaActual.setIdMateria(codigo);
             materiaActual.setNombre(nombre);
             materiaActual.setAnioMateria(anio);
@@ -228,7 +229,7 @@ public class MateriaView extends javax.swing.JInternalFrame {
         // Si al buscar por código se encuentra una materia, materiaActual deja de estar en modo "null"
         if(materiaActual != null){
             materiaData.eliminarMateria(materiaActual.getIdMateria()); // La elimino por el ID o código
-            materiaActual = null; // vuelco a setear en null a la materia
+            materiaActual = null; // vuelvo a setear en null a la materia
             limpiarCampos();
         } else{
             JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna materia");

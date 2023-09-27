@@ -1,12 +1,16 @@
 
 package universidadejemplo.Vistas;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -25,6 +29,9 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         initComponents();
         alumnoData = new AlumnoData();
         alumnoActual = null;
+        
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) jdFechaNac.getDateEditor();
+        editor.setEditable(false);
 
         //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel 
         getContentPane().setBackground(new Color(0, 128, 128));
@@ -241,19 +248,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     private void jbGuardarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarAlumActionPerformed
         // CLICK EN "GUARDAR" - SE VINCULA CON "GUARDAR ALUMNO" Y CON "MODIFICAR ALUMNO"        
         
-        Date fechaSeleccionada = (Date) jdFechaNac.getDate(); // Se castea = en este caso se cambia a un formato de tipo Date
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy"); // Creamos el formato deseado
-        
-        try{
-        String fechaFormateada = (String) formatoFecha.format(fechaSeleccionada); // Se obtiene la fecha formateada: convierte lo que ingresó el usuario al formato creado
-        // Si no logra convertirlo, salta el catch
-        
-        if (fechaFormateada.equals(jdFechaNac.getDateFormatString())) {             
-            
-            /*--------------------------------------------------------------------------------------------------------*/
-            // Este era el bloque original del evento Guardar
-            
-            try {
+        try {
             // De igual manera que el método anterior, debo parsear los JTextField
             // y rescatar los datos de cada uno de los campos, pero en este caso, para validar si
             // ese alumno ya existe o no. No lo seteo de una.
@@ -289,15 +284,8 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
         }
-            
-         /*---------------------------------------------------------------------------------------------------*/
-         
-        }   
         
-        } catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto: dd/mm/aaaa");
-            jdFechaNac.setDate(null);
-        } 
+        
     }//GEN-LAST:event_jbGuardarAlumActionPerformed
 
     private void jbNuevoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoAlumActionPerformed
@@ -337,26 +325,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         jdFechaNac.setDate(null);
     }
 
-    /*
-    private boolean compararFormato(){
-        Date fechaSeleccionada = (Date) jdFechaNac.getDate(); // Se castea = en este caso se cambia a un formato de tipo Date
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy"); // Creamos el formato deseado
-        
-        try{
-        String fechaFormateada = (String) formatoFecha.format(fechaSeleccionada); // Se obtiene la fecha formateada: convierte lo que ingresó el usuario al formato creado
-        
-        if (fechaFormateada.equals(jdFechaNac.getDateFormatString())) {            
-            return true;
-        }
-        
-        } catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto: dd/mm/aaaa");
-            jdFechaNac.setDate(null);
-            return false;
-        } 
-        
-    }
-*/
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
