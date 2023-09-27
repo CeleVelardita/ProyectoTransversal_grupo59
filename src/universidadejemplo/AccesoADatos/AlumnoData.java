@@ -93,7 +93,7 @@ public class AlumnoData {
 
             // Creo un diálogo para que me muestre si se modificó correctamente
             if (modificacion == 1) {
-                JOptionPane.showMessageDialog(null, "El alumno ya existe en la base de datos. Alumno modificado");
+                JOptionPane.showMessageDialog(null, "Alumno modificado");
             } else {
                 JOptionPane.showMessageDialog(null, "El alumno no existe");
             }

@@ -47,9 +47,10 @@ public class InscripcionData {
             
             //si no salta la exception es porque logró acceder a la tabla y puedo continuar
             //ahora mandaré las incripciones con un set
-            ps.setInt(2, insc.getMateria().getIdMateria());
-            //ps.setInt(3, insc.getAlumno().getIdAlumno());
-            ps.setDouble(4, insc.getNota());
+            ps.setDouble(1, insc.getNota());
+            ps.setInt(2, insc.getAlumno().getIdAlumno());
+            ps.setInt(3, insc.getMateria().getIdMateria());
+                        
             ps.executeUpdate();
             //voy a recibir claves que me confirmen que se pudo SETear y las guardo en un tipo result
             ResultSet rs = ps.getGeneratedKeys();
@@ -59,7 +60,7 @@ public class InscripcionData {
             }
             ps.close();        
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripción "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripción (método guardarInscripción)"+ex.getMessage());
         } 
         
       /*
@@ -115,7 +116,7 @@ public class InscripcionData {
             ps.close();//cierro petición
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (lista ObtenerInscripciones) "+ex.getMessage());
         }
         //Ahora devuelvo la lista cursadas a quien llamó a obtenerInscripciones() 
         return cursadas;
@@ -156,7 +157,7 @@ public class InscripcionData {
             ps.close();//cierro petición
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (lista inscripciones por alumno) "+ex.getMessage());
         }
         //Ahora devuelvo la lista cursadas a quien llamó a obtenerInscripciones() 
         return cursadas;
@@ -196,7 +197,7 @@ public class InscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (lista materias cursadas) "+ex.getMessage());
         }
         
         return materias;   
@@ -233,7 +234,7 @@ public class InscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (lista materias no crusadas) "+ex.getMessage());
         }
         
         return materias;
@@ -279,7 +280,7 @@ public class InscripcionData {
             ps.setInt( 3, idMateria);
             
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (acualizar nota) "+ex.getMessage());
         }
     /*
     Para probar este método actualizarNota(int idAlumno, int idMateria, double nota)
@@ -321,7 +322,7 @@ public class InscripcionData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (alumnos por materia) "+ex.getMessage());
         }
         
         
@@ -365,7 +366,7 @@ public class InscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (notas por materia) "+ex.getMessage());
         }
         
         return inscripto;
