@@ -17,7 +17,7 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
     
     private ArrayList<Materia> listaMatInsc;
     private ArrayList<Materia> listaMatNOInsc;
-    private ArrayList<Alumno> listaA;
+    private ArrayList<Alumno> listaA; // Lista de Alumnos
     
     private InscripcionData inscData;
     private MateriaData mData;
@@ -34,13 +34,19 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
     public AdministracionView_ManejoDeInscripciones() {
         initComponents();
         
-        //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel (LO LOGRÉ!!!)
+        //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel 
         JInternalFrame frame = new JInternalFrame();
         getContentPane().setBackground(new Color(0, 128, 128));
         
-        aData = new AlumnoData();
-        listaA = (ArrayList<Alumno>)aData.listarAlumnos();
+        aData = new AlumnoData();        
+        listaA = (ArrayList<Alumno>)aData.listarAlumnos(); // Se recuperan de AlumnoData todos los alumnos activos
+        // como devuelve una lista se caste a un arrayList (ArrayList<Alumno>)
         modeloTabla = new DefaultTableModel();
+        
+        //En el video también se instancian inscData y mData, chequear por qué
+        inscData = new InscripcionData();
+        mData = new MateriaData();
+        
         cargarComboBoxAlumnos();
         armarCabeceraTabla();
         
@@ -83,6 +89,7 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
         });
 
         jbotonInscribir.setText("Inscribir");
+        jbotonInscribir.setEnabled(false);
         jbotonInscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbotonInscribirActionPerformed(evt);
@@ -90,6 +97,7 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
         });
 
         jbotonAnularInscripcion.setText("Anular Inscripcion");
+        jbotonAnularInscripcion.setEnabled(false);
         jbotonAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbotonAnularInscripcionActionPerformed(evt);
@@ -138,20 +146,20 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
                         .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbotonInscribir)
-                                .addGap(152, 152, 152)
-                                .addComponent(jbotonAnularInscripcion)
-                                .addGap(156, 156, 156)
-                                .addComponent(jbotonSalir))))
+                        .addComponent(jbotonInscribir)
+                        .addGap(152, 152, 152)
+                        .addComponent(jbotonAnularInscripcion)
+                        .addGap(156, 156, 156)
+                        .addComponent(jbotonSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(jlTitulo_Listado, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(200, 200, 200)
-                        .addComponent(jlTitulo_Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jlTitulo_Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -169,9 +177,9 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jr_MateriasInscriptas)
                     .addComponent(jr_MateriasNOInscriptas))
-                .addGap(46, 46, 46)
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbotonInscribir)
                     .addComponent(jbotonAnularInscripcion)
@@ -184,6 +192,7 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
 
     private void jr_MateriasInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jr_MateriasInscriptasActionPerformed
     // Evento del boton de Materias Inscriptas
+    
         //borramos filas para "limpiar"
         borrarFilaDeTabla();
         //Al seleccionar éste botón hacemos que el otro se deseleccione
@@ -224,9 +233,10 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
             int idMateria = (Integer)modeloTabla.getValueAt(filaSeleccionada, 0);//casteamos porque devuelve un object
             String nombreMateria = (String)modeloTabla.getValueAt(filaSeleccionada, 1);//casteamos porque devuelve un object
             int anio = (Integer)modeloTabla.getValueAt(filaSeleccionada, 2);//casteamos porque devuelve un object
+            
             Materia m = new Materia(idMateria, nombreMateria, anio, true);//creamos la materia con los datos obtenidos
             //creamos la inscripción y le pasamos alu, m y 0 por parámetro
-            Inscripcion i = new Inscripcion(alu, m , 0);
+            Inscripcion i = new Inscripcion(alu, m , 0); // Va 0 porque en principio no hay nota registrada
             //mandamos la inscripcion al método guardarInscripcion de InscripcionData
             inscData.guardarInscripcion(i);
             //limpiamos la tabla
@@ -284,10 +294,11 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
             jcbAlumno.addItem(item);
         }
     }
+   
     private void armarCabeceraTabla(){
          ArrayList<Object> filaCabecera = new  ArrayList<>();
          filaCabecera.add("ID");
-         filaCabecera.add("Nombre");
+         filaCabecera.add("Materia");
          filaCabecera.add("Año");
          
          for(Object it: filaCabecera){
@@ -298,6 +309,7 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
     
     private void borrarFilaDeTabla(){
         int indice = modeloTabla.getRowCount() -1;
+        //NOTA: Recordar que el rowCount me devuelve una cantidad de columnas 
         for(int i = indice ; i >= 0 ; i--){
             modeloTabla.removeRow(i);           
         }
@@ -307,16 +319,24 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
         borrarFilaDeTabla();
         Alumno alu = (Alumno)jcbAlumno.getSelectedItem();
         listaMatInsc = (ArrayList)inscData.obtenerMateriasCursadas(alu.getIdAlumno());
-        
-        
+        for(Materia m: listaMatInsc){
+            modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
+        }        
     }
     
     private void cargarMateriasNoInscriptas(){
         borrarFilaDeTabla();
+        
+        /* 
+        Este método primero selecciona del comboBox al alumno seleccionado, luego llama al método obtenerMateriasNoCursadas
+        de InscripciónData y se le pasa del alumno seleccionado anteriormente, el id
+        Finalmente se obtiene una lista con todas las materias en las que no está inscripto dicho alumno
+        */
+        
         Alumno alu = (Alumno)jcbAlumno.getSelectedItem();
         listaMatNOInsc = (ArrayList)inscData.obtenerMateriasNOCursadas(alu.getIdAlumno());
         for(Materia m: listaMatNOInsc){
-            modeloTabla.addRow(new Object[]{m.getIdMateria(),m.getNombre() , m.getAnioMateria()});
+            modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
         }
     }
 }

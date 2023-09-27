@@ -1,18 +1,26 @@
 
 package universidadejemplo.Vistas;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.Entidades.Alumno;
 
 public class AlumnoView extends javax.swing.JInternalFrame {
-    
+
     // Creo estos atributos acá porque me di cuenta que los uso en todos los métodos
     private AlumnoData alumnoData;
     private Alumno alumnoActual;
@@ -21,9 +29,13 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         initComponents();
         alumnoData = new AlumnoData();
         alumnoActual = null;
-        //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel (LO LOGRÉ!!!)
+        
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) jdFechaNac.getDateEditor();
+        editor.setEditable(false);
+
+        //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel 
         getContentPane().setBackground(new Color(0, 128, 128));
-         
+
     }
 
     /**
@@ -78,6 +90,12 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha de Nacimiento:");
 
+        jdFechaNac.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jdFechaNacFocusGained(evt);
+            }
+        });
+
         jbGuardarAlum.setText("Guardar");
         jbGuardarAlum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,45 +140,59 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                         .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbNuevoAlum)
-                            .addComponent(jLabel6))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbNuevoAlum, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jcbEstado)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(102, 102, 102)
-                                .addComponent(jbBuscarAlum))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addComponent(jbGuardarAlum)
                                 .addGap(27, 27, 27)
                                 .addComponent(jbEliminarAlum)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                                 .addComponent(jbSalirAlum))
-                            .addComponent(jtApellido, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(173, 173, 173)))
                         .addGap(67, 67, 67))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbEstado)
-                            .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbBuscarAlum))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscarAlum)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbBuscarAlum)
+                            .addComponent(jLabel2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -205,7 +237,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 jtNombre.setText(alumnoActual.getNombre());
                 jdFechaNac.setDate(Date.valueOf(alumnoActual.getFechaNac())); // Parsear/convertir de LocalDate a Date
                 jcbEstado.setSelected(alumnoActual.isActivo()); // RECORDAR!!!! si es un booleano va "IS" con un setSELECTED
-            } 
+            }
         } catch (NumberFormatException e) {
             // como en este caso el mensaje lo lanzaría desde esta ventana, en el JOption va "this" en lugar de "null"
             JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
@@ -214,8 +246,8 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarAlumActionPerformed
 
     private void jbGuardarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarAlumActionPerformed
-        // CLICK EN "GUARDAR" - SE VINCULA CON "GUARDAR ALUMNO" Y CON "MODIFICAR ALUMNO"
-
+        // CLICK EN "GUARDAR" - SE VINCULA CON "GUARDAR ALUMNO" Y CON "MODIFICAR ALUMNO"        
+        
         try {
             // De igual manera que el método anterior, debo parsear los JTextField
             // y rescatar los datos de cada uno de los campos, pero en este caso, para validar si
@@ -248,9 +280,12 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                 alumnoData.modificarAlumno(alumnoActual);
                 limpiarCampos();
             }
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
         }
+        
+        
     }//GEN-LAST:event_jbGuardarAlumActionPerformed
 
     private void jbNuevoAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoAlumActionPerformed
@@ -261,8 +296,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoAlumActionPerformed
 
     private void jbEliminarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarAlumActionPerformed
-        // CLICK EN "ELIMINAR" - SE VINCULA CON EL MÉTODO "ELIMINAR ALUMNO"
-
+        // CLICK EN "ELIMINAR" - SE VINCULA CON EL MÉTODO "ELIMINAR ALUMNO
         // Si alumnoActual no está nulo, si buscamos un alumno y se encontró...
         if (alumnoActual != null) {
             alumnoData.eliminarAlumno(alumnoActual.getIdAlumno());
@@ -277,6 +311,11 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirAlumActionPerformed
 
+    private void jdFechaNacFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jdFechaNacFocusGained
+        JLabel etiqueta = new JLabel("dd/mm/aaaa");
+        etiqueta.setVisible(false);
+    }//GEN-LAST:event_jdFechaNacFocusGained
+
     private void limpiarCampos(){ // Creo un método para que se limpie la pantalla
         jtDni.setText("");
         jtApellido.setText("");
@@ -285,6 +324,8 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         jdFechaNac.setDate(null);
     }
 
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
