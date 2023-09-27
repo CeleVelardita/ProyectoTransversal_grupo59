@@ -38,7 +38,7 @@ public class InscripcionData {
     }
     
     public void guardarInscripcion(Inscripcion insc){
-        String sql="INSERT INTO inscripcion(idAlumno, idMateria, nota) VALUES(?,?,?)"; 
+        String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES(?,?,?)"; 
                    //3 valores que se llenan dinámicamente, entonces ponemos (?,?,?) como valores por parámetro
         try {
             //creo el acceso a la tabla con su respectivo catch porque puede saltar una Exception
@@ -48,7 +48,8 @@ public class InscripcionData {
             //si no salta la exception es porque logró acceder a la tabla y puedo continuar
             //ahora mandaré las incripciones con un set
             ps.setInt(2, insc.getMateria().getIdMateria());
-            ps.setDouble(3, insc.getNota());
+            //ps.setInt(3, insc.getAlumno().getIdAlumno());
+            ps.setDouble(4, insc.getNota());
             ps.executeUpdate();
             //voy a recibir claves que me confirmen que se pudo SETear y las guardo en un tipo result
             ResultSet rs = ps.getGeneratedKeys();
@@ -58,7 +59,7 @@ public class InscripcionData {
             }
             ps.close();        
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripción");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripción "+ex.getMessage());
         } 
         
       /*
@@ -121,8 +122,6 @@ public class InscripcionData {
         //prueba en el main del proyecto
     }
     
-    
-    
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno){
         //Método que devuelve una lista de inscripciones
         ArrayList<Inscripcion> cursadas= new ArrayList<>(); //esta lista está vacía todavía
@@ -165,18 +164,13 @@ public class InscripcionData {
         
     }
     
-    
-    
-    
-    
-    
     public List<Materia> obtenerMateriasCursadas(int idAlumno){
         
         ArrayList<Materia> materias= new ArrayList();
         
-        String sql= "SELECT inscripcion.idMateria, nombre, año FROM incripcion,"
-                    + " materia WHERE incripcion.idMateria = materia.idMateria "
-                    +" AND isncripcion.idAlumno = ? ;";
+        String sql= "SELECT inscripcion.idMateria, nombre, año FROM inscripcion,"
+                    + " materia WHERE inscripcion.idMateria = materia.idMateria "
+                    +" AND inscripcion.idAlumno = ? ;";
         /*Necesitamos solo las materias donde el alumno está inscripto
         en el  FROM tengo un producto carteciano y no tengo JOIN, es decir,
         uno las tablas inscripcion y materia con una ","
@@ -208,14 +202,11 @@ public class InscripcionData {
         return materias;   
     }
     
-    
-    
-    
     public List<Materia> obtenerMateriasNOCursadas(int idAlumno){
         ArrayList<Materia> materias= new ArrayList();
         
         String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria not in "
-                    + "(SELECT idMateria FROM incripcion WHERE idAlumno=?)";
+                    + "(SELECT idMateria FROM inscripcion WHERE idAlumno=?)";
         /*Explicación del sql
           subconsulta (SELECT idMateria FROM incripcion WHERE idAlumno=?) -> materias donde está inscripto el alumno
           SELECT * FROM materia -> pide todas las materias

@@ -59,7 +59,7 @@ public class MateriaData {
     }
 
     public Materia buscarMateria(int id) {
-        String sql = "SELECT nombre, año, estado FROM materia WHERE idMateria = ? AND estado = 1";
+        String sql = "SELECT idMateria, nombre, año, estado FROM materia WHERE idMateria = ?";
         Materia materia = null; // Lo seteo a null para que "arranque de cero"
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -69,6 +69,7 @@ public class MateriaData {
             if(buscarId.next()){
                 materia = new Materia();
                 // Luego de crear una nueva materia en la línea anterior, empiezo a setear
+                materia.setIdMateria(buscarId.getInt("idMateria"));
                 materia.setNombre(buscarId.getString("nombre"));
                 materia.setAnioMateria(buscarId.getInt("año"));
                 materia.setActivo(buscarId.getBoolean("estado"));

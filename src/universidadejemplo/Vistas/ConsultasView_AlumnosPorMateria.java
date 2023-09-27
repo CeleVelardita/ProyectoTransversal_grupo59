@@ -23,7 +23,7 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
     
     public ConsultasView_AlumnosPorMateria() {
         initComponents();        
-        //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel (LO LOGRÉ!!!)
+        //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel 
         JInternalFrame frame = new JInternalFrame();
         getContentPane().setBackground(new Color(0, 128, 128));
         
@@ -144,7 +144,7 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
 
     private void cargarComboBoxMaterias(){
         // Limpia el JComboBox
-            jcbMateria.removeAllItems();
+        jcbMateria.removeAllItems();
 
         //para el jcombobox necesito los métodos de este objeto para recuperar de la BD 
         MateriaData materiaData = new MateriaData(); //declaro e inicializo
@@ -159,8 +159,8 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
             comboBoxModel.addElement(materia); // Agregamos el objeto Materia directamente
         }
 
-       // Establecer el modelo en el JComboBox
-       jcbMateria.setModel(comboBoxModel);
+        // Establecer el modelo en el JComboBox
+        jcbMateria.setModel(comboBoxModel);
     }
     
     private void armarCabeceraTabla(){

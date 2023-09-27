@@ -296,8 +296,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoAlumActionPerformed
 
     private void jbEliminarAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarAlumActionPerformed
-        // CLICK EN "ELIMINAR" - SE VINCULA CON EL MÉTODO "ELIMINAR ALUMNO"
-
+        // CLICK EN "ELIMINAR" - SE VINCULA CON EL MÉTODO "ELIMINAR ALUMNO
         // Si alumnoActual no está nulo, si buscamos un alumno y se encontró...
         if (alumnoActual != null) {
             alumnoData.eliminarAlumno(alumnoActual.getIdAlumno());

@@ -228,7 +228,8 @@ public class MateriaView extends javax.swing.JInternalFrame {
         // CLICK EN "ELIMINAR" - SE VINCULA CON "ELIMINAR MATERIA"
         // Si al buscar por código se encuentra una materia, materiaActual deja de estar en modo "null"
         if(materiaActual != null){
-            materiaData.eliminarMateria(materiaActual.getIdMateria()); // La elimino por el ID o código
+            System.out.println(materiaActual.getIdMateria());
+            materiaData.eliminarMateria(Integer.parseInt(jtCodigo.getText())); // La elimino por el ID o código
             materiaActual = null; // vuelvo a setear en null a la materia
             limpiarCampos();
         } else{
