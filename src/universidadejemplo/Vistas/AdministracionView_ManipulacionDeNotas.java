@@ -175,7 +175,7 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
     private javax.swing.JTable jtNotas;
     // End of variables declaration//GEN-END:variables
 
-private void cargarComboBoxMaterias(){
+    private void cargarComboBoxMaterias(){
         // Limpia el JComboBox
             jcbAlumno.removeAllItems();
 
