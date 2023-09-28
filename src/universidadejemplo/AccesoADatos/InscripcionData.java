@@ -338,17 +338,17 @@ public class InscripcionData {
     public List<Inscripcion> obtenerNotasDeMaterias(int idAlumno){
         ArrayList<Inscripcion> inscripto= new ArrayList<>();
         
-        String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria not in "
-                    + "(SELECT idMateria FROM incripcion WHERE idAlumno=?)";
+        String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria in "
+                    + "(SELECT idMateria FROM inscripcion WHERE idAlumno=?)";
         /*Explicación del sql
           subconsulta (SELECT idMateria FROM incripcion WHERE idAlumno=?) -> materias donde está inscripto el alumno
           SELECT * FROM materia -> pide todas las materias
           WHERE estado = 1 que esas materias tengan estado 1, estén activas  
-          AND idMateria not in -> que no estén en la lista de materias donde el alumno esté insrcipto
+          AND idMateria in -> que estén en la lista de materias donde el alumno esté insrcipto
         
         
           conclusión: pide todas las materias que estén activas 
-          y NO se encuentren en la lista de materias donde el alumno esté inscripto
+          y se encuentren en la lista de materias donde el alumno esté inscripto
         */
         try {
             PreparedStatement ps=con.prepareStatement(sql);
