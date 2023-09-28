@@ -274,10 +274,16 @@ public class InscripcionData {
      
         String sql="UPDATE inscripcion SET nota = ? where idAlumno = ? and idMateria = ?";
         try{
+            System.out.println("estoy en el método actualizar nota");
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setDouble( 1, nota);
             ps.setInt( 2, idAlumno);
             ps.setInt( 3, idMateria);
+            int fila = ps.executeUpdate();
+            if (fila > 0) {
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }
+            ps.close();
             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (acualizar nota) "+ex.getMessage());
