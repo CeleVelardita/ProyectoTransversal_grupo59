@@ -28,7 +28,7 @@ public class Vistas extends javax.swing.JFrame {
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("frame");
+        setTitle("Base de Datos ULP");
 
         escritorio.setBackground(new java.awt.Color(204, 204, 204));
         escritorio.setPreferredSize(new java.awt.Dimension(700, 600));

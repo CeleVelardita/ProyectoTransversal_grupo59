@@ -16,19 +16,25 @@ import universidadejemplo.Entidades.Materia;
 public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame {
 
     //modelo de la tabla 
-    private DefaultTableModel modeloTabla;
+    private DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+        public boolean isCellEditable(int row, int colum) {
+            return false;
+        }
+    };
             
     public ConsultasView_AlumnosPorMateria() {
         initComponents();        
         //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel 
         JInternalFrame frame = new JInternalFrame();
         getContentPane().setBackground(new Color(0, 128, 128));
-                
-        modeloTabla = new DefaultTableModel();
         
+        //Deshabilito la reordenación de las columnas
+        jtListaDeAlumnos.getTableHeader().setReorderingAllowed(false);
+            
+                
         cargarComboBoxMaterias();
-        armarCabeceraTabla();
-                   
+                           
     }
    
 
@@ -49,6 +55,7 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
         jlTitulo_listado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitulo_listado.setText("Listado de Alumnos por Materia");
 
+        jlSeleccioneMateria.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jlSeleccioneMateria.setText("Seleccione una materia: ");
 
         jcbMateria.setToolTipText("");
@@ -60,27 +67,34 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
 
         jtListaDeAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "DNI", "Apellido", "Nombre"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jtListaDeAlumnos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtListaDeAlumnos);
         if (jtListaDeAlumnos.getColumnModel().getColumnCount() > 0) {
             jtListaDeAlumnos.getColumnModel().getColumn(0).setResizable(false);
             jtListaDeAlumnos.getColumnModel().getColumn(1).setResizable(false);
+            jtListaDeAlumnos.getColumnModel().getColumn(2).setResizable(false);
+            jtListaDeAlumnos.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jbSalirConsulta.setText("Salir");
@@ -170,19 +184,6 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
         jcbMateria.setModel(comboBoxModel);
     }
     
-    private void armarCabeceraTabla(){
-         ArrayList<Object> filaCabecera = new  ArrayList<>();
-         filaCabecera.add("ID");
-         filaCabecera.add("DNI");
-         filaCabecera.add("Apellido");
-         filaCabecera.add("Nombre");
-         
-         for(Object it: filaCabecera){
-             modeloTabla.addColumn(it);
-         }
-         jtListaDeAlumnos.setModel(modeloTabla);
-    }
-
     private void borrarFilaDeTabla(){
         int indice = modeloTabla.getRowCount() -1;
         for(int i = indice ; i >= 0 ; i--){
@@ -206,17 +207,5 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
         }
     }
     
-    private void fijarTabla(){
-        
-        JTable tabla = new JTable(modeloTabla);
-        
-        tabla.getTableHeader().setReorderingAllowed(false);
-        
-        
-        
-        
-        
-        
-    }
     
 }

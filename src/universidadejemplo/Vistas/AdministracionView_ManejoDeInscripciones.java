@@ -24,13 +24,13 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
     private AlumnoData aData;
     
     //modelo de la tabla 
-    private DefaultTableModel modeloTabla;
+    private DefaultTableModel modeloTabla = new DefaultTableModel() {
+        // Con esto hago que las celdas no sean editables
+        public boolean isCellEditable(int row, int colum) {
+            return false;
+        }
+    };
 
-    
-    
-    
-    
-    
     public AdministracionView_ManejoDeInscripciones() {
         initComponents();
         
@@ -38,12 +38,14 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
         JInternalFrame frame = new JInternalFrame();
         getContentPane().setBackground(new Color(0, 128, 128));
         
+        //Deshabilito la reordenación de las columnas
+        jTable_ListaMaterias.getTableHeader().setReorderingAllowed(false);
+        
         aData = new AlumnoData();        
         listaA = (ArrayList<Alumno>)aData.listarAlumnos(); // Se recuperan de AlumnoData todos los alumnos activos
         // como devuelve una lista se caste a un arrayList (ArrayList<Alumno>)
-        modeloTabla = new DefaultTableModel();
-        
-        //En el video también se instancian inscData y mData, chequear por qué
+              
+                
         inscData = new InscripcionData();
         mData = new MateriaData();
         
@@ -69,9 +71,13 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
         jTable_ListaMaterias = new javax.swing.JTable();
         jlTitulo_Listado = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(606, 600));
+
+        jlTitulo_Formulario.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
         jlTitulo_Formulario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitulo_Formulario.setText("Formulario de Inscripcion");
 
+        jlSelecAlum.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jlSelecAlum.setText("Seleccione un alumno:");
 
         jr_MateriasInscriptas.setText("Materias Inscriptas");
@@ -117,19 +123,28 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
             }
         });
 
+        jTable_ListaMaterias.setAutoCreateRowSorter(true);
         jTable_ListaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable_ListaMaterias.setAutoscrolls(false);
+        jTable_ListaMaterias.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable_ListaMaterias);
 
+        jlTitulo_Listado.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
         jlTitulo_Listado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTitulo_Listado.setText("Listado de Materias");
 
@@ -137,19 +152,15 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jr_MateriasInscriptas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jr_MateriasNOInscriptas)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(106, 106, 106))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(jlSelecAlum)
-                        .addGap(35, 35, 35)
-                        .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jlSelecAlum))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jbotonInscribir)
@@ -158,15 +169,21 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
                         .addGap(156, 156, 156)
                         .addComponent(jbotonSalir))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(jlTitulo_Listado, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(jlTitulo_Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(jlTitulo_Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(jlTitulo_Listado, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(jr_MateriasInscriptas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jr_MateriasNOInscriptas)
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,12 +191,12 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
                 .addContainerGap()
                 .addComponent(jlTitulo_Formulario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlSelecAlum)
                     .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jlTitulo_Listado)
-                .addGap(32, 32, 32)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jr_MateriasInscriptas)
                     .addComponent(jr_MateriasNOInscriptas))
@@ -350,4 +367,6 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
             modeloTabla.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnioMateria()});
         }
     }
+    
+
 }

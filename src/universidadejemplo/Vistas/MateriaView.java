@@ -45,7 +45,7 @@ public class MateriaView extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Materia");
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
         jLabel1.setText("Materia");
 
         jLabel2.setText("Código:");
@@ -135,27 +135,27 @@ public class MateriaView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbBuscar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(73, 73, 73)
-                            .addComponent(jbNuevo)
-                            .addGap(26, 26, 26)
-                            .addComponent(jbGuardar)
-                            .addGap(34, 34, 34)
-                            .addComponent(jbEliminar)
-                            .addGap(34, 34, 34)
-                            .addComponent(jbSalir))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(237, 237, 237)
-                            .addComponent(jLabel1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jbNuevo)
+                        .addGap(26, 26, 26)
+                        .addComponent(jbGuardar)
+                        .addGap(34, 34, 34)
+                        .addComponent(jbEliminar)
+                        .addGap(34, 34, 34)
+                        .addComponent(jbSalir)))
                 .addContainerGap(62, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(215, 215, 215)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(13, 13, 13)
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)

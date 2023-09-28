@@ -22,13 +22,16 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
         initComponents();
         getContentPane().setBackground(new Color(0, 128, 128));//color ventana
         
-        modeloTabla = new DefaultTableModel();//inicializamos modelo de la tabla
+        //Deshabilito la reordenación de las columnas
+        jtNotas.getTableHeader().setReorderingAllowed(false);
         
+        modeloTabla = (DefaultTableModel) jtNotas.getModel();// le paso mi tabla para poder configurar las celdas y que no todas sean editables
+                
         ListaInscripto=new ArrayList<>();
         inscData=new InscripcionData();
         
         cargarComboBoxMaterias();
-        armarCabeceraTabla();
+        //armarCabeceraTabla();
         
     }
 
@@ -50,6 +53,7 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
         jlTitulo_CargarNotas.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jlTitulo_CargarNotas.setText("Carga de Notas");
 
+        jlSeleccioneAlumno.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jlSeleccioneAlumno.setText("Seleccione un Alumno: ");
 
         jcbAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -58,18 +62,37 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
             }
         });
 
+        jtNotas.setAutoCreateRowSorter(true);
         jtNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Código", "Nombre", "Nota"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtNotas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtNotas);
+        if (jtNotas.getColumnModel().getColumnCount() > 0) {
+            jtNotas.getColumnModel().getColumn(0).setResizable(false);
+            jtNotas.getColumnModel().getColumn(1).setResizable(false);
+            jtNotas.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jbCargar.setText("Guardar");
         jbCargar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,8 +124,8 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jlSeleccioneAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlSeleccioneAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jcbAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
@@ -197,17 +220,7 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
        jcbAlumno.setModel(comboBoxModel);
     }
 
-    private void armarCabeceraTabla(){
-        ArrayList<Object> filaCabecera = new  ArrayList<>();
-             filaCabecera.add("Código");
-             filaCabecera.add("Nombre de Materia");
-             filaCabecera.add("Nota");
-
-             for(Object it: filaCabecera){
-                 modeloTabla.addColumn(it);
-             }
-             jtNotas.setModel(modeloTabla);
-    }    
+     
     
     private void borrarFilaDeTabla(){
         int indice = modeloTabla.getRowCount() -1;

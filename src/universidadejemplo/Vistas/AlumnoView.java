@@ -71,7 +71,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         setTitle("Alumno");
         setPreferredSize(new java.awt.Dimension(500, 400));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 15)); // NOI18N
         jLabel1.setText("Alumno");
 
         jLabel2.setText("Documento:");
@@ -175,7 +175,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                 .addComponent(jbGuardarAlum)
                                 .addGap(27, 27, 27)
                                 .addComponent(jbEliminarAlum)
@@ -187,7 +187,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
                                 .addGap(173, 173, 173)))
                         .addGap(67, 67, 67))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
