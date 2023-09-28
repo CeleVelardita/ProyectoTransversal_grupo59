@@ -1,11 +1,11 @@
 
 package universidadejemplo.Entidades;
-//cele anduvo por aquí, ¿vamos bien?
+
 public class Materia {
-    private int idMateria;
-    private String nombre;
-    private int anioMateria;
-    private boolean activo;
+    int idMateria;
+    String nombre;
+    int anioMateria;
+    boolean activo;
 
     public Materia() {
     }
@@ -57,7 +57,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return this.nombre;
+        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anioMateria=" + anioMateria + ", activo=" + activo + '}';
     }
      
 }
