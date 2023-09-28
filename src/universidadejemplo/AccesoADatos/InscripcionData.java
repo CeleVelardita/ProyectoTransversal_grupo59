@@ -297,7 +297,7 @@ public class InscripcionData {
         ArrayList<Alumno> alumnosMateria=new ArrayList();
         
         String sql="SELECT a.idAlumno, dni, nombre, apellido, fechaNacimiento, estado "
-                   + "FROM inscripcion i, alumno a WHERE i.idAlumno= a.idALumno AND idMateria=?";
+                   + "FROM inscripcion i, alumno a WHERE i.idAlumno= a.idAlumno AND idMateria=?";
         try {
             /*Explicación sql
             se desea unir la tabla inscribir con la tabla alumno
@@ -314,6 +314,7 @@ public class InscripcionData {
             while(rs.next()){
                 Alumno alumno=new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
@@ -338,30 +339,51 @@ public class InscripcionData {
     public List<Inscripcion> obtenerNotasDeMaterias(int idAlumno){
         ArrayList<Inscripcion> inscripto= new ArrayList<>();
         
-        String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria in "
-                    + "(SELECT idMateria FROM inscripcion WHERE idAlumno=?)";
+        String sql= "SELECT inscripcion.nota, materia.idMateria, materia.nombre " +
+                 "FROM inscripcion " +
+                 "INNER JOIN materia ON inscripcion.idMateria = materia.idMateria " +
+                 "WHERE inscripcion.idAlumno = ?";
         /*Explicación del sql
-          subconsulta (SELECT idMateria FROM incripcion WHERE idAlumno=?) -> materias donde está inscripto el alumno
-          SELECT * FROM materia -> pide todas las materias
-          WHERE estado = 1 que esas materias tengan estado 1, estén activas  
-          AND idMateria in -> que estén en la lista de materias donde el alumno esté insrcipto
+        
+          En resumen, esta consulta SQL está diseñada para obtener las notas (nota), los IDs de las materias (idMateria), 
+        y los nombres de las materias (nombre) de la tabla inscripcion, relacionándolos con la tabla materia a través de la columna idMateria,
+        y filtrando los resultados para un alumno específico a través de la columna idAlumno.
         
         
-          conclusión: pide todas las materias que estén activas 
-          y se encuentren en la lista de materias donde el alumno esté inscripto
+        "SELECT inscripcion.nota, materia.idMateria, materia.nombre ": 
+        Esta parte especifica las columnas que se seleccionarán en la consulta.
+        En este caso, se seleccionan tres columnas: nota de la tabla inscripcion, idMateria y nombre de la tabla materia.
+        
+        "FROM inscripcion ": Indica la tabla principal de la que se seleccionarán los datos, en este caso, la tabla inscripcion.
+        
+        "INNER JOIN materia ON inscripcion.idMateria = materia.idMateria ": 
+        Esta parte realiza una unión (JOIN) entre las tablas inscripcion y materia. 
+        Establece una relación entre estas dos tablas utilizando las columnas idMateria. 
+        Esto significa que se obtendrán datos de ambas tablas basándose en la igualdad de los valores de idMateria en ambas tablas.
+        
+        "WHERE inscripcion.idAlumno = ?": Establece una condición para filtrar los resultados.
+        Aquí, se seleccionarán solo las filas de la tabla inscripcion donde el valor de la columna idAlumno 
+        sea igual al valor que se proporciona como parámetro (?). El ? es un marcador de posición que se llenará 
+        con el valor real cuando se ejecute la consulta utilizando un PreparedStatement en Java. 
+        Esto permite hacer la consulta específica para un alumno en particular.
+        
         */
         try {
-            PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, idAlumno); //idAlumno pasado por parámetro
-            ResultSet rs=ps.executeQuery();//donde almacnamos la respuesta de la BD
-            //Ahora comenzamos a recorrer
-            while(rs.next()){
-                Inscripcion insc=new Inscripcion();
-                insc.setId_Materia(rs.getInt("idMateria"));
-                insc.setNombreMateria(rs.getString("nombre"));
-                insc.setNota(rs.getDouble("nota"));
-                //ya obtuvimos los datos, ahora agregarlos a arraylist inscripto
-                inscripto.add(insc);
+            PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idAlumno); // idAlumno pasado al parámetro dinámico
+        ResultSet rs = ps.executeQuery(); // donde almacenamos la respuesta de la BD
+        // Ahora comenzamos a recorrer
+        while (rs.next()) {
+            int idMateria = rs.getInt("idMateria");
+            String nombreMateria = rs.getString("nombre");
+            double nota = rs.getDouble("nota");
+            
+            // Crear un objeto Inscripcion con los datos obtenidos
+            Inscripcion insc = new Inscripcion(idMateria, nombreMateria, nota);
+
+            // Agregar insc a la lista
+            inscripto.add(insc);
+           
             }
             ps.close();
             

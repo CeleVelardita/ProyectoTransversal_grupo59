@@ -111,6 +111,12 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
             }
         });
 
+        jcbAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnoActionPerformed(evt);
+            }
+        });
+
         jTable_ListaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -267,6 +273,11 @@ public class AdministracionView_ManejoDeInscripciones extends javax.swing.JInter
     private void jbotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbotonSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jbotonSalirActionPerformed
+
+    private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
+        // Borrar la tabla
+        borrarFilaDeTabla();
+    }//GEN-LAST:event_jcbAlumnoActionPerformed
 
 
     
