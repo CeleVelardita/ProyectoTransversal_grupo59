@@ -5,9 +5,7 @@ public class Inscripcion {
     private int idInscripcion;
     private Alumno alumno;
     private Materia materia;
-    private double nota;
-
-    
+    private double nota;   
     
     
     
@@ -16,6 +14,7 @@ public class Inscripcion {
     /*-------Apartado para AdministracionView_ManipulacionDeNotas---------------*/
     private String nombreMateria; //es para AdministracionView_ManipulacionDeNotas 
     private int id_Materia;
+    
     //Constructor para AdministracionView_ManipulacionDeNotas
     public Inscripcion(int id_Materia, String nombreMateria, double nota) {
         this.id_Materia = id_Materia;

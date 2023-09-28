@@ -1,12 +1,20 @@
 package universidadejemplo.Vistas;
 
 
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import universidadejemplo.Vistas.ConsultasView_AlumnosPorMateria;
 
 public class Vistas extends javax.swing.JFrame {
 
+        
     public Vistas() {
         initComponents();
+        
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +35,7 @@ public class Vistas extends javax.swing.JFrame {
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("frame");
 
         escritorio.setBackground(new java.awt.Color(204, 204, 204));
         escritorio.setPreferredSize(new java.awt.Dimension(700, 600));
@@ -104,9 +113,9 @@ public class Vistas extends javax.swing.JFrame {
         jMenuBar2.add(jmConsultas);
 
         jmSalir.setText("Salir");
-        jmSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmSalirActionPerformed(evt);
+        jmSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmSalirMouseClicked(evt);
             }
         });
         jMenuBar2.add(jmSalir);
@@ -123,6 +132,8 @@ public class Vistas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -219,11 +230,15 @@ public class Vistas extends javax.swing.JFrame {
         //traigo al frente la ventana consulta
         escritorio.moveToFront(consulta);   
     }//GEN-LAST:event_jmConsultasActionPerformed
+      
+    private void jmSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmSalirMouseClicked
+        dispose();
+        System.exit(0);
+    }//GEN-LAST:event_jmSalirMouseClicked
 
-    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jmSalirActionPerformed
-
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -254,6 +269,9 @@ public class Vistas extends javax.swing.JFrame {
                 new Vistas().setVisible(true);
             }
         });
+             
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

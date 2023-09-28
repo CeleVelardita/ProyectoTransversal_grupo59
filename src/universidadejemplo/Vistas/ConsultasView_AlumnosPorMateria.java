@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JInternalFrame;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
@@ -16,22 +17,20 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
 
     //modelo de la tabla 
     private DefaultTableModel modeloTabla;
-    
-    
-    
-    
-    
+            
     public ConsultasView_AlumnosPorMateria() {
         initComponents();        
         //Le cambio el colorcito al JInternalFrame sin necesidad de usar un JPanel 
         JInternalFrame frame = new JInternalFrame();
         getContentPane().setBackground(new Color(0, 128, 128));
-        
-        
+                
         modeloTabla = new DefaultTableModel();
+        
         cargarComboBoxMaterias();
         armarCabeceraTabla();
+                   
     }
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -82,7 +81,6 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
         if (jtListaDeAlumnos.getColumnModel().getColumnCount() > 0) {
             jtListaDeAlumnos.getColumnModel().getColumn(0).setResizable(false);
             jtListaDeAlumnos.getColumnModel().getColumn(1).setResizable(false);
-            jtListaDeAlumnos.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jbSalirConsulta.setText("Salir");
@@ -153,7 +151,7 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
 
     private void cargarComboBoxMaterias(){
         // Limpia el JComboBox
-        jcbMateria.removeAllItems();
+        jcbMateria.removeAllItems();        
 
         //para el jcombobox necesito los métodos de este objeto para recuperar de la BD 
         MateriaData materiaData = new MateriaData(); //declaro e inicializo
@@ -207,4 +205,18 @@ public class ConsultasView_AlumnosPorMateria extends javax.swing.JInternalFrame 
             modeloTabla.addRow(new Object[]{a.getIdAlumno(),a.getDni(), a.getApellido() , a.getNombre()});
         }
     }
+    
+    private void fijarTabla(){
+        
+        JTable tabla = new JTable(modeloTabla);
+        
+        tabla.getTableHeader().setReorderingAllowed(false);
+        
+        
+        
+        
+        
+        
+    }
+    
 }
