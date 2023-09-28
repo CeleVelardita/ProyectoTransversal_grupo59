@@ -29,6 +29,7 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
         
         cargarComboBoxMaterias();
         armarCabeceraTabla();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -131,8 +132,8 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
-        cargarComboBoxMaterias();
-        cargarMateriasNoInscriptas();
+        
+        cargarMateriasConNotas();
     }//GEN-LAST:event_jcbAlumnoActionPerformed
 
     private void jbCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarActionPerformed
@@ -215,10 +216,12 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
         }
     }
 
-    private void cargarMateriasNoInscriptas(){
-        borrarFilaDeTabla();
-        Alumno alu = (Alumno)jcbAlumno.getSelectedItem();
-        ListaInscripto= (ArrayList)inscData.obtenerNotasDeMaterias(alu.getIdAlumno());
+    private void cargarMateriasConNotas(){
+        borrarFilaDeTabla();//limpiamos tabla
+        Alumno alu = (Alumno)jcbAlumno.getSelectedItem();//recuperamos al alumno seleccionado en el combobox   
+        int idAlumno=alu.getIdAlumno();//obtenemos el id del alumno  
+        ListaInscripto= (ArrayList)inscData.obtenerNotasDeMaterias(idAlumno);
+        //mostramos en tabla la lista fila por fila (materias con sus notas)
         for(Inscripcion i: ListaInscripto){
             modeloTabla.addRow(new Object[]{i.getId_Materia(),i.getNombreMateria() , i.getNota()});
         }
