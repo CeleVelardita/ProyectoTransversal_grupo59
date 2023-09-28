@@ -1,10 +1,6 @@
 package universidadejemplo.Vistas;
 
 
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import universidadejemplo.Vistas.ConsultasView_AlumnosPorMateria;
 
 public class Vistas extends javax.swing.JFrame {
@@ -12,9 +8,6 @@ public class Vistas extends javax.swing.JFrame {
         
     public Vistas() {
         initComponents();
-        
-        
-        
     }
 
     @SuppressWarnings("unchecked")

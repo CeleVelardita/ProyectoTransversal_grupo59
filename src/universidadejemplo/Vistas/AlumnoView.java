@@ -30,6 +30,7 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         alumnoData = new AlumnoData();
         alumnoActual = null;
         
+        //Configuro para que el campo del calendario no sea editable
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jdFechaNac.getDateEditor();
         editor.setEditable(false);
 
@@ -302,7 +303,6 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un número entero, sin puntos ni comas");
         }
-        
         
     }//GEN-LAST:event_jbGuardarAlumActionPerformed
 
