@@ -59,7 +59,7 @@ public class MateriaData {
     }
 
     public Materia buscarMateria(int id) {
-        String sql = "SELECT nombre, año, estado FROM materia WHERE idMateria = ? AND estado = 1";
+        String sql = "SELECT idMateria, nombre, año, estado FROM materia WHERE idMateria = ?";
         Materia materia = null; // Lo seteo a null para que "arranque de cero"
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -69,6 +69,7 @@ public class MateriaData {
             if(buscarId.next()){
                 materia = new Materia();
                 // Luego de crear una nueva materia en la línea anterior, empiezo a setear
+                materia.setIdMateria(buscarId.getInt("idMateria"));
                 materia.setNombre(buscarId.getString("nombre"));
                 materia.setAnioMateria(buscarId.getInt("año"));
                 materia.setActivo(buscarId.getBoolean("estado"));
@@ -83,15 +84,15 @@ public class MateriaData {
     }    
     
     public void modificarMateria(Materia materia){
-        String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ?";
+        String sql = "UPDATE materia SET nombre = ?, año = ?, estado = ? WHERE idMateria = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);            
-            ps.setString(2, materia.getNombre());
-            ps.setInt(3, materia.getAnioMateria());
-            ps.setBoolean(4, materia.isActivo());
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnioMateria());
+            ps.setBoolean(3, materia.isActivo());
             
             // Por último se setea el idMateria
-            ps.setInt(1, materia.getIdMateria());
+            ps.setInt(4, materia.getIdMateria());
             
             // Luego ejecuto
             int modificacion = ps.executeUpdate();
@@ -104,7 +105,7 @@ public class MateriaData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al modificar la materia");
+            JOptionPane.showMessageDialog(null, "Error al modificar la materia "+ex.getMessage());
         }        
     }
     

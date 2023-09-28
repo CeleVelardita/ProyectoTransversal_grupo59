@@ -35,7 +35,7 @@ public class Conexion {
                 
                 connection = DriverManager.getConnection("jdbc:mariadb://localhost/universidadulp","root", "");
                 // si se quiere se podría agregar un JOption con un mensaje indicando que se ha conectado a la BD
-                JOptionPane.showMessageDialog(null, "Conectado");
+                //JOptionPane.showMessageDialog(null, "Conectado");
             } catch(SQLException ex){
                 // RECORDAR!! El primer parámetro es "null" porque no se lanza desde ninguna ventana
                 JOptionPane.showMessageDialog(null, "Error al conectarse a la BD "+ex.getMessage());                
