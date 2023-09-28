@@ -272,7 +272,7 @@ public class MateriaView extends javax.swing.JInternalFrame {
     private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
         // Este evento evita que el usuario ingrese datos erróneos al campo
         char letra=evt.getKeyChar();
-        if((letra<'a' || letra>'z') && (letra<'A'||letra>'Z')){
+        if((letra<'a' || letra>'z') && (letra<'A'||letra>'Z')&& evt.getKeyChar()!=' '){
             //si ingresa algo que no está dentro del valor numérico del codigo ASCII de las letras: 
             evt.consume();
         }
