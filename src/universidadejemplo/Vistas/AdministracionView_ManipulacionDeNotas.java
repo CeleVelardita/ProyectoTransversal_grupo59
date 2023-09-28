@@ -149,7 +149,7 @@ public class AdministracionView_ManipulacionDeNotas extends javax.swing.JInterna
             int idAlumno=alu.getIdAlumno();
             //recuperamos el id  de la materia y la nota
             int idMateria = (Integer)modeloTabla.getValueAt(filaSeleccionada, 0);//casteamos porque devuelve un object
-            int nota = (Integer)modeloTabla.getValueAt(filaSeleccionada, 3);//casteamos porque devuelve un object
+            Double nota = (Double)modeloTabla.getValueAt(filaSeleccionada, 2);//casteamos porque devuelve un object
             
             //mandamos los datos al método encargado de guardar la nota
             inscData.actualizarNota(idAlumno, idMateria, nota);

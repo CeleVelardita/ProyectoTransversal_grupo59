@@ -278,7 +278,11 @@ public class InscripcionData {
             ps.setDouble( 1, nota);
             ps.setInt( 2, idAlumno);
             ps.setInt( 3, idMateria);
-            
+            int filas=ps.executeUpdate();
+            if(filas>0){
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+            }
+            ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción (acualizar nota) "+ex.getMessage());
         }
