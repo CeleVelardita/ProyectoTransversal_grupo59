@@ -50,6 +50,12 @@ public class MateriaView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Código:");
 
+        jtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCodigoKeyTyped(evt);
+            }
+        });
+
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,7 +63,19 @@ public class MateriaView extends javax.swing.JInternalFrame {
             }
         });
 
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Nombre:");
+
+        jtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtAnioKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("Año:");
 
@@ -242,6 +260,36 @@ public class MateriaView extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyTyped
+        char letra=evt.getKeyChar();
+        if (!Character.isDigit(letra)) {
+            // Consumir el carácter que no es un dígito
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_jtCodigoKeyTyped
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+        // Este evento evita que el usuario ingrese datos erróneos al campo
+        char letra=evt.getKeyChar();
+        if((letra<'a' || letra>'z') && (letra<'A'||letra>'Z')){
+            //si ingresa algo que no está dentro del valor numérico del codigo ASCII de las letras: 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNombreKeyTyped
+
+    private void jtAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyTyped
+        char letra=evt.getKeyChar();
+        if (!Character.isDigit(letra)) {
+            // Consumir el carácter que no es un dígito
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtAnioKeyTyped
+
+    
+    
+    
+    
     private void limpiarCampos(){ // Creo un método para que se limpie la pantalla
         jtCodigo.setText("");
         jtNombre.setText("");
