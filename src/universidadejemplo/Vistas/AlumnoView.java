@@ -75,6 +75,12 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Documento:");
 
+        jtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtDniKeyTyped(evt);
+            }
+        });
+
         jbBuscarAlum.setText("Buscar");
         jbBuscarAlum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +90,19 @@ public class AlumnoView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Apellido:");
 
+        jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtApellidoKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Nombre:");
+
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Estado:");
 
@@ -316,6 +334,36 @@ public class AlumnoView extends javax.swing.JInternalFrame {
         etiqueta.setVisible(false);
     }//GEN-LAST:event_jdFechaNacFocusGained
 
+    private void jtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniKeyTyped
+        // Este evento evita que el usuario ingrese datos erróneos al campo         
+        char letra=evt.getKeyChar();
+        if (!Character.isDigit(letra)) {
+            // Consumir el carácter que no es un dígito
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtDniKeyTyped
+
+    private void jtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyTyped
+        // Este evento evita que el usuario ingrese datos erróneos al campo
+        char letra=evt.getKeyChar();
+        if((letra<'a' || letra>'z') && (letra<'A'||letra>'Z')){
+            //si ingresa algo que no está dentro del valor numérico del codigo ASCII de las letras: 
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jtApellidoKeyTyped
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+        // Este evento evita que el usuario ingrese datos erróneos al campo
+        char letra=evt.getKeyChar();
+        if((letra<'a' || letra>'z') && (letra<'A'||letra>'Z')){
+            //si ingresa algo que no está dentro del valor numérico del codigo ASCII de las letras: 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNombreKeyTyped
+
+    
+    
     private void limpiarCampos(){ // Creo un método para que se limpie la pantalla
         jtDni.setText("");
         jtApellido.setText("");
